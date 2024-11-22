@@ -34,11 +34,11 @@ def register():
   n=int(n)
   k=int(k)
 
-  db_name='sphere.db'
+  db_name='sphere3.db'
   conn=sqlite3.connect(db_name)
-  df=pd.read_csv('./sphere.csv')
+  df=pd.read_csv('./sphere3.csv')
   df.to_sql('sphere',conn,if_exists='replace')
-  df=pd.read_csv('./HyoujiGen.csv')
+  df=pd.read_csv('./generator3.csv')
   df.to_sql('gen',conn,if_exists='replace')
   c=conn.cursor()
 
@@ -161,7 +161,9 @@ def register():
       for i,elem in enumerate(el_li):
         gen_query=f'select*from gen where id="{elem}"'
         for row in c.execute(gen_query):
-          if row['kinds']==0:
+          if row['kinds']==2:
+            res+='{ s }'
+          elif row['kinds']==0:
             if el_dim_li[i]< row['n']:res+='{'+row['latex'] +f'_{ {el_dim_li[i]} }'+'(Not Defined)}'
             elif i==0 or el_li[i-1]!=el_li[i]:sq_cnt=1
 #一番最初か、前のidと違うとき、カウントを１にする。
@@ -170,21 +172,31 @@ def register():
             if i== len(el_li)-1:
 #最後のときにtexを追加
               if el_dim_li[i] >=row['n']:
-                if '{3,' in row['latex'] or '{4,' in row['latex']:res+='{' +row['latex'] +f'{el_dim_li[i-sq_cnt+1]}' +'} }'
-                else:res+='{' +row['latex']+f'_{ {el_dim_li[i-sq_cnt+1]} }'+'}'
-                if sq_cnt>=2:res= res[:-1]+f'^{ {sq_cnt} }'+'}'
+                if row['latex'][-1]=='(':
+                  res+='{' +row['latex'] +f'{int(el_dim_li[i-sq_cnt+1])}' +') }'
+                else:
+                  res+='{' +row['latex']+f'_{ {el_dim_li[i-sq_cnt+1]} }'+'}'
+                if sq_cnt>=2:
+                  res= res[:-1]+f'^{ {sq_cnt} }'+'}'
             elif el_li[i]!= el_li[i+1]:
 #次のidと違うときにtexを追加
               if el_dim_li[i] >=row['n']:
-                if '{3,' in row['latex'] or '{4,' in row['latex']:res+='{' +row['latex'] +f'{el_dim_li[i-sq_cnt+1]}'+'} }'
-                else:res+='{'+ row['latex']+f'_{ {el_dim_li[i-sq_cnt+1]} }'+'}'
-                if sq_cnt>=2: res= res[:-1]+f'^{ {sq_cnt} }'+'}'
+                if row['latex'][-1]=='(':
+                  res+='{' +row['latex'] +f'{int(el_dim_li[i-sq_cnt+1])}' +') }'
+                else:
+                  res+='{'+ row['latex']+f'{ {el_dim_li[i-sq_cnt+1]} }'+') }'
+                if sq_cnt>=2: 
+                  res= res[:-1]+f'^{ {sq_cnt} }'+'}'
 #カウントの数をべきにする。
 #次のidと同じ場合は何もしない
-          elif el_dim_li[i] <row['n']:res+='{'+' E '+f"^{ {el_dim_li[i]-row['n']} }"+row['latex']+'(Not Defined)}'
-          elif el_dim_li[i] ==row['n']:res+='{' +row['latex']+'}'
-          elif el_dim_li[i]== row['n']+1:res+='{'+' E '+row['latex']+'}'
-          else:res+='{'+' E '+f"^{ {el_dim_li[i]-row['n']} }"+row['latex']+'}'
+          elif el_dim_li[i] <row['n']:
+            res+='{'+' Ea '+f"^{ {el_dim_li[i]-row['n']} }"+row['latex']+'(Not Defined)}'
+          elif el_dim_li[i] ==row['n']:
+            res+='{' +row['latex']+'}'
+          elif el_dim_li[i]== row['n']+1:
+            res+='{'+' Eb '+row['latex']+'}'
+          else:
+            res+='{'+' Ec '+f"^{ {el_dim_li[i]-row['n']} }"+row['latex']+'}'
       if 0 in el_li:res='0'
       return res
 
@@ -463,22 +475,52 @@ def register():
 
 ###########################################################
 
-  nn=[n*2-1,n-1,n,n*2-1,n-1]
-  kk=[k-n+2,k,k,k-n+1,k-1]
+  if n%2==1:
+    nn=[n-2,n-2,n,n-2,n-2]
+    kk=[k,k,k,k-1,k-1]
+  else:
+    nn=[0,n-1,n,2*n-1,0]
+    kk=[0,k,k,k-n+1,0]
   HoGroup=[]
-  for i in range(5):
-    txt_HoGroup=' \pi_{ {{nn1 + kk1}} }^{ {{nn1}} } '
-    tmp_HoGroup=Template(txt_HoGroup)
-    dict_HoGroup={'nn1':nn[i],'kk1':kk[i]}
-    HoGroup.append(tmp_HoGroup.render(dict_HoGroup))
+  if n%2==1:
+    for i in range(5):
+      if i==0 or i==3:
+        txt_HoGroup=' Q_{ {{nn1 + kk1}} }^{ {{nn1}} }'
+      else:
+        txt_HoGroup=' \pi_{ {{nn1 + kk1}} }^{ {{nn1}} } '
+      tmp_HoGroup=Template(txt_HoGroup)
+      dict_HoGroup={'nn1':nn[i],'kk1':kk[i]}
+      HoGroup.append(tmp_HoGroup.render(dict_HoGroup))
+  else:
+    for i in range(5):
+      if i==0 or i==4:
+        txt_HoGroup='0'
+      else:
+        txt_HoGroup=' \pi_{ {{nn1 + kk1}} }^{ {{nn1}} } '
+      tmp_HoGroup=Template(txt_HoGroup)
+      dict_HoGroup={'nn1':nn[i],'kk1':kk[i]}
+      HoGroup.append(tmp_HoGroup.render(dict_HoGroup))
 
-  EHPmap=['\Delta','E','H','\Delta']
+  if n%2==1:
+    EHPmap=['P','E^{2}','H','P']
+  else:
+    EHPmap=['','E',f'[\iota_{ {n} },\iota_{ {n} }]','']
   Arrow=[]
-  for i in range(4):
-    txt_Arrow=' \stackrel{ {{map1}} }{\longrightarrow} '
-    tmp_Arrow=Template(txt_Arrow)
-    dict_Arrow={'map1':EHPmap[i]}
-    Arrow.append(tmp_Arrow.render(dict_Arrow))
+  if n%2==1:
+    for i in range(4):
+      txt_Arrow=' \stackrel{ {{map1}} }{\longrightarrow} '
+      tmp_Arrow=Template(txt_Arrow)
+      dict_Arrow={'map1':EHPmap[i]}
+      Arrow.append(tmp_Arrow.render(dict_Arrow))
+  else:
+    for i in range(4):
+      if i==2:
+        txt_Arrow=' \stackrel{ {{map1}} }{\longleftarrow}'
+      else:
+        txt_Arrow=' \stackrel{ {{map1}} }{\longrightarrow} '
+      tmp_Arrow=Template(txt_Arrow)
+      dict_Arrow={'map1':EHPmap[i]}
+      Arrow.append(tmp_Arrow.render(dict_Arrow))
 
   for i in range(5):
     if i==0: table=HoGroup[0]
@@ -500,9 +542,16 @@ def register():
   table_arrow=[[],[],[],[],[]]
   table_image=[[],[],[],[],[]]
   for i in range(5):
+    if n%2==0 and i==2: continue
     for j in range(hg[i].direct_sum()):
       table_gen[i].append(hg[i].rep_linear_tex(hg[i].gen_coe_list(j)))
       if i < 4: table_arrow[i].append('\longrightarrow')
+  if n%2==0:
+    if table_gen[1]!=['0']:
+      table_gen[2].extend(map(lambda x:'E'+x if x!='0' else '', table_gen[1]))
+    if table_gen[3]!=['0']:
+      table_gen[2].extend(map(lambda x:f'[\iota_{ {n} },\iota_{ {n} }]'+x if x!='0' else '', table_gen[3]))
+
 
   table_image[0]=[hg[1].rep_linear_tex(hg[1].gen_coe_to_rep_coe(hg[1].mod_gen_coe_list(hg[1].rep_coe_to_gen_coe(hg[0].gen_P_coe(j)[0]))))
     for j in range(hg[0].direct_sum())]
@@ -517,6 +566,7 @@ def register():
 
   table_group=[[],[],[],[],[]]
   for i in range(5):
+    if n%2==0 and i==2: continue
     if nn[i]<=kk[i]+2: query=f'select*from sphere where n={nn[i]} and k={kk[i]}'
     else: query=f'select*from sphere where n={kk[i]+2} and k={kk[i]}'
     for row in c.execute(query):
@@ -527,8 +577,18 @@ def register():
           orders=int(row['orders'])
           table_group[i].append(f'Z_{ {orders} }')
         except: table_group[i].append('')
+  if n%2==0:
+    if nn[1]<=kk[1]+2:
+      if table_group[1]!=['0']:
+        table_group[2].extend(table_group[1])
+    if nn[2]<=kk[2]+2:
+      if table_group[3]!=['0']:
+        table_group[2].extend(table_group[3])
+  if table_group[2]==[]:
+    table_group[2].append('0')
 
-  m_d_sum=hg[2].max_direct_sum()
+  # m_d_sum=hg[2].max_direct_sum()
+  m_d_sum=4
 
   for i in range(5):
     if len(table_arrow[i])<m_d_sum:
