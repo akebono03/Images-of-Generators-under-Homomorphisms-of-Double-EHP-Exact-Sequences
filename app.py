@@ -315,7 +315,8 @@ def register():
       return res,res_ref
 
     def E_image_tex(self,id):
-      E_hg=HomotopyGroup(self.n+1,self.k)
+      # E_hg=HomotopyGroup(self.n+1,self.k)
+      E_hg=HomotopyGroup(self.n+2,self.k)
       self_E_coe=self.E_coe(id)
       res=E_hg.rep_linear_tex(self_E_coe[0])
       res_ref=self_E_coe[1]
@@ -342,7 +343,8 @@ def register():
     def P_coe_matrix(self):
       matrix_li=[]
       d_sum=self.direct_sum()
-      hg_P=HomotopyGroup((self.n-1)//2,self.n+self.k-2-(self.n-1)//2)
+      # hg_P=HomotopyGroup((self.n-1)//2,self.n+self.k-2-(self.n-1)//2)
+      hg_P=HomotopyGroup(self.n-2, self.k)
       P_d_sum=hg_P.direct_sum()
       for id in range(d_sum):
         for row in c.execute(self.query_id(id)):
@@ -355,7 +357,7 @@ def register():
     def E_coe_matrix(self):
       matrix_li=[]
       d_sum=self.direct_sum()
-      hg_E=HomotopyGroup(self.n+1,self.k)
+      hg_E=HomotopyGroup(self.n+2,self.k)
       E_d_sum=hg_E.direct_sum()
       for id in range(d_sum):
         for row in c.execute(self.query_id(id)):
@@ -370,7 +372,8 @@ def register():
     def H_coe_matrix(self):
       matrix_li=[]
       d_sum=self.direct_sum()
-      hg_H=HomotopyGroup((self.n*2)-1,self.n+self.k-(self.n*2)+1)
+      # hg_H=HomotopyGroup((self.n*2)-1,self.n+self.k-(self.n*2)+1)
+      hg_H=HomotopyGroup(self.n-2, self.k-1)
       H_d_sum=hg_H.direct_sum()
       for id in range(d_sum):
         for row in c.execute(self.query_id(id)):
@@ -454,7 +457,8 @@ def register():
           res=(gen_matrix.transpose()*self_E_coe_matrix).tolist()[0]
           ref=row['E']
         else: res=[]
-        hg=HomotopyGroup(self.n+1,self.k) if self.k+2>=self.n else HomotopyGroup(self.k+2,self.k)
+        # hg=HomotopyGroup(self.n+1,self.k) if self.k+2>=self.n else HomotopyGroup(self.k+2,self.k)
+        hg=HomotopyGroup(self.n+2,self.k) if self.k+2>=self.n else HomotopyGroup(self.k+2,self.k)
         del res[hg.direct_sum():]
       return res,ref
 
