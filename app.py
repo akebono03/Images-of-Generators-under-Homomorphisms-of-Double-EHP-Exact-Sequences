@@ -69,8 +69,12 @@ def register():
         query=f'select*from sphere where n={n} and k={k}'
         query_count=f'select count( * ) from sphere where n={n} and k={k}'
       else:
-        query=f'select*from sphere where n={k+2} and k={k}'
-        query_count=f'select count( * ) from sphere where n={k+2} and k={k}'
+        if k%2==1:
+          query=f'select*from sphere where n={k+2} and k={k}'
+          query_count=f'select count( * ) from sphere where n={k+2} and k={k}'
+        else:
+          query=f'select*from sphere where n={k+2} and k={k}'
+          query_count=f'select count( * ) from sphere where n={k+2} and k={k}'
       self.query = query
       self.query_count= query_count
 
@@ -558,7 +562,8 @@ def register():
   if nn[i]<=kk[i]+2:
     table_image[1]=[hg[2].rep_linear_tex(hg[2].gen_coe_to_rep_coe(hg[2].mod_gen_coe_list(hg[2].rep_coe_to_gen_coe(hg[1].gen_E_coe(j)[0]))))
       for j in range(hg[1].direct_sum())]
-  else: table_image[1]=table_gen[2]
+  else: 
+    table_image[1]=table_gen[2]
   table_image[2]=[hg[3].rep_linear_tex(hg[3].gen_coe_to_rep_coe(hg[3].mod_gen_coe_list(hg[3].rep_coe_to_gen_coe(hg[2].gen_H_coe(j)[0]))))
     for j in range(hg[2].direct_sum())]
   table_image[3]=[hg[4].rep_linear_tex(hg[4].gen_coe_to_rep_coe(hg[4].mod_gen_coe_list(hg[4].rep_coe_to_gen_coe(hg[3].gen_P_coe(j)[0]))))
@@ -567,8 +572,13 @@ def register():
   table_group=[[],[],[],[],[]]
   for i in range(5):
     if n%2==0 and i==2: continue
-    if nn[i]<=kk[i]+2: query=f'select*from sphere where n={nn[i]} and k={kk[i]}'
-    else: query=f'select*from sphere where n={kk[i]+2} and k={kk[i]}'
+    if nn[i]<=kk[i]+2: 
+      query=f'select*from sphere where n={nn[i]} and k={kk[i]}'
+    else: 
+      if kk[i]%2==1:
+        query=f'select*from sphere where n={kk[i]+2} and k={kk[i]}'
+      else:
+        query=f'select*from sphere where n={kk[i]+3} and k={kk[i]}'
     for row in c.execute(query):
       if row['orders'] == 0: table_group[i].append('0')
       elif row['orders']==inf: table_group[i].append('Z')
@@ -577,6 +587,7 @@ def register():
           orders=int(row['orders'])
           table_group[i].append(f'Z_{ {orders} }')
         except: table_group[i].append('')
+
   if n%2==0:
     if nn[1]<=kk[1]+2:
       if table_group[1]!=['0']:
@@ -584,8 +595,8 @@ def register():
     if nn[2]<=kk[2]+2:
       if table_group[3]!=['0']:
         table_group[2].extend(table_group[3])
-  if table_group[2]==[]:
-    table_group[2].append('0')
+    if table_group[2]==[]:
+      table_group[2].append('0')
 
   # m_d_sum=hg[2].max_direct_sum()
   m_d_sum=4
