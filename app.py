@@ -484,14 +484,14 @@ def register():
 ###########################################################
 
   if n%2==1:
-    nn=[n-2,n-2,n,n-2,n-2]
-    kk=[k,k,k,k-1,k-1]
+    nn=[n-2,n-2,n,n-2,n-2,n]
+    kk=[k,k,k,k-1,k-1,k-1]
   else:
-    nn=[0,n-1,n,2*n-1,0]
-    kk=[0,k,k,k-n+1,0]
+    nn=[0,n-1,n,2*n-1,0,0]
+    kk=[0,k,k,k-n+1,0,0]
   HoGroup=[]
   if n%2==1:
-    for i in range(5):
+    for i in range(6):
       if i==0 or i==3:
         txt_HoGroup=' Q_{ {{nn1 + kk1}} }^{ {{nn1}} }'
       else:
@@ -510,12 +510,12 @@ def register():
       HoGroup.append(tmp_HoGroup.render(dict_HoGroup))
 
   if n%2==1:
-    EHPmap=['P','E^{2}','H','P']
+    EHPmap=['P','E^{2}','H','P','E^{2}']
   else:
-    EHPmap=['','E',f'[\iota_{ {n} },\iota_{ {n} }]','']
+    EHPmap=['','E',f'[\iota_{ {n} },\iota_{ {n} }]','','']
   Arrow=[]
   if n%2==1:
-    for i in range(4):
+    for i in range(5):
       txt_Arrow=' \stackrel{ {{map1}} }{\longrightarrow} '
       tmp_Arrow=Template(txt_Arrow)
       dict_Arrow={'map1':EHPmap[i]}
@@ -533,10 +533,12 @@ def register():
   for i in range(5):
     if i==0: table=HoGroup[0]
     else: table=table+" & & & "+Arrow[i-1]+" & & & "+HoGroup[i]
+  # if n%2==1:
+  #   table=table+" & & & "+Arrow[4]+" & & & "+HoGroup[5]
 
-  hg=[HomotopyGroup(nn[i],kk[i]) for i in range(5)]
+  hg=[HomotopyGroup(nn[i],kk[i]) for i in range(6)]
 
-  table_ref=[[],[],[],[],[]]
+  table_ref=[[],[],[],[],[],[]]
   query=f'select*from sphere where n={nn[0]} and k={kk[0]}'
   table_ref[0]=[row['P'] for row in c.execute(query)]
   query=f'select*from sphere where n={nn[1]} and k={kk[1]}'
@@ -545,15 +547,19 @@ def register():
   table_ref[2]=[row['H'] for row in c.execute(query)]
   query=f'select*from sphere where n={nn[3]} and k={kk[3]}'
   table_ref[3]=[row['P'] for row in c.execute(query)]
+  query=f'select*from sphere where n={nn[4]} and k={kk[4]}'
+  table_ref[4]=[row['E'] for row in c.execute(query)]
 
-  table_gen=[[],[],[],[],[]]
-  table_arrow=[[],[],[],[],[]]
-  table_image=[[],[],[],[],[]]
-  for i in range(5):
-    if n%2==0 and i==2: continue
+  table_gen=[[],[],[],[],[],[]]
+  table_arrow=[[],[],[],[],[],[]]
+  table_image=[[],[],[],[],[],[]]
+
+  for i in range(6):
+    if n%2==0 and (i==2 or i==5): continue
     for j in range(hg[i].direct_sum()):
       table_gen[i].append(hg[i].rep_linear_tex(hg[i].gen_coe_list(j)))
-      if i < 4: table_arrow[i].append('\longrightarrow')
+      if i < 5: table_arrow[i].append('\longrightarrow')
+  
   if n%2==0:
     if table_gen[1]!=['0']:
       table_gen[2].extend(map(lambda x:'E'+x if x!='0' else '', table_gen[1]))
@@ -563,18 +569,26 @@ def register():
 
   table_image[0]=[hg[1].rep_linear_tex(hg[1].gen_coe_to_rep_coe(hg[1].mod_gen_coe_list(hg[1].rep_coe_to_gen_coe(hg[0].gen_P_coe(j)[0]))))
     for j in range(hg[0].direct_sum())]
+  table_image[4]=[hg[5].rep_linear_tex(hg[5].gen_coe_to_rep_coe(hg[5].mod_gen_coe_list(hg[5].rep_coe_to_gen_coe(hg[4].gen_P_coe(j)[0]))))
+    for j in range(hg[4].direct_sum())]
+  
   if nn[i]<=kk[i]+2:
     table_image[1]=[hg[2].rep_linear_tex(hg[2].gen_coe_to_rep_coe(hg[2].mod_gen_coe_list(hg[2].rep_coe_to_gen_coe(hg[1].gen_E_coe(j)[0]))))
       for j in range(hg[1].direct_sum())]
+    table_image[4]=[hg[5].rep_linear_tex(hg[5].gen_coe_to_rep_coe(hg[5].mod_gen_coe_list(hg[5].rep_coe_to_gen_coe(hg[4].gen_E_coe(j)[0]))))
+      for j in range(hg[4].direct_sum())]
   else: 
     table_image[1]=table_gen[2]
+
   table_image[2]=[hg[3].rep_linear_tex(hg[3].gen_coe_to_rep_coe(hg[3].mod_gen_coe_list(hg[3].rep_coe_to_gen_coe(hg[2].gen_H_coe(j)[0]))))
     for j in range(hg[2].direct_sum())]
   table_image[3]=[hg[4].rep_linear_tex(hg[4].gen_coe_to_rep_coe(hg[4].mod_gen_coe_list(hg[4].rep_coe_to_gen_coe(hg[3].gen_P_coe(j)[0]))))
     for j in range(hg[3].direct_sum())]
-
-  table_group=[[],[],[],[],[]]
-  for i in range(5):
+  # table_image[4]=[hg[5].rep_linear_tex(hg[5].gen_coe_to_rep_coe(hg[5].mod_gen_coe_list(hg[5].rep_coe_to_gen_coe(hg[4].gen_P_coe(j)[0]))))
+  #   for j in range(hg[4].direct_sum())]
+  
+  table_group=[[],[],[],[],[],[]]
+  for i in range(6):
     if n%2==0 and i==2: continue
     if nn[i]<=kk[i]+2: 
       query=f'select*from sphere where n={nn[i]} and k={kk[i]}'
@@ -605,7 +619,7 @@ def register():
   # m_d_sum=hg[2].max_direct_sum()
   m_d_sum=4
 
-  for i in range(5):
+  for i in range(6):
     if len(table_arrow[i])<m_d_sum:
       for j in range(m_d_sum-len(table_arrow[i])):
         table_group[i].append('')
