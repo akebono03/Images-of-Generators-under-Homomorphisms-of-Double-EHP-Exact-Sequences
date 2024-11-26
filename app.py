@@ -13,11 +13,11 @@ n=2
 k=2
 HoGroup=[]
 Arrow=[]
-table_group=[[],[],[],[],[]]
-table_gen=[[],[],[],[],[]]
-table_arrow=[[],[],[],[],[]]
-table_image=[[],[],[],[],[]]
-table_ref=[[],[],[],[],[]]
+table_group=[[],[],[],[],[],[]]
+table_gen=[[],[],[],[],[],[]]
+table_arrow=[[],[],[],[],[],[]]
+table_image=[[],[],[],[],[],[]]
+table_ref=[[],[],[],[],[],[]]
 m_d_sum=1
 
 @app.route('/')
@@ -40,6 +40,9 @@ def register():
   df.to_sql('sphere',conn,if_exists='replace')
   df=pd.read_csv('./generator3.csv')
   df.to_sql('gen',conn,if_exists='replace')
+  df=pd.read_csv('./fiber3.csv')
+  df.to_sql('fiber3',conn,if_exists='replace')
+ 
   c=conn.cursor()
 
   inf=float('inf')
@@ -56,6 +59,44 @@ def register():
 
   def Dot(A,B):
     return sp.expand( (A.transpose()*B)[0,0])
+
+  class Fiber:
+    def __init__(self,n,k):
+      self.n=int(n)
+      self.k=int(k)
+
+      if k<=-1:
+        query=f'select*from fiber3 where n={0} and k={-1}'
+        query_count=f'select count( * ) from fiber3 where n={0} and k={-1}'
+      elif k+2>=n:
+        query=f'select*from fiber3 where n={n} and k={k}'
+        query_count=f'select count( * ) from fiber3 where n={n} and k={k}'
+      else:
+        if k%2==1:
+          query=f'select*from fiber3 where n={k+2} and k={k}'
+          query_count=f'select count( * ) from fiber3 where n={k+2} and k={k}'
+        else:
+          query=f'select*from fiber3 where n={k+2} and k={k}'
+          query_count=f'select count( * ) from fiber3 where n={k+2} and k={k}'
+      self.query = query
+      self.query_count= query_count
+
+    def direct_sum(self):
+#直和成分の個数を与えるメソッド
+      for row in c.execute( self.query_count):
+        res=row['count( * )']
+      return res
+
+    def order_list(self):
+#orderのリストを与えるメソッド
+      try:res=[row['orders'] if row['orders']==inf else int(row['orders']) for row in c.execute(self.query)]
+      except:res=[0]
+      return res
+
+    def group_order(self):
+      res=max(self.order_list())
+      return res
+
 
   class HomotopyGroup:
     def __init__(self,n,k):
@@ -539,13 +580,13 @@ def register():
   hg=[HomotopyGroup(nn[i],kk[i]) for i in range(6)]
 
   table_ref=[[],[],[],[],[],[]]
-  query=f'select*from sphere where n={nn[0]} and k={kk[0]}'
+  query=f'select*from fiber3 where n={nn[0]} and k={kk[0]}'
   table_ref[0]=[row['P'] for row in c.execute(query)]
   query=f'select*from sphere where n={nn[1]} and k={kk[1]}'
   table_ref[1]=[row['E'] for row in c.execute(query)]
   query=f'select*from sphere where n={nn[2]} and k={kk[2]}'
   table_ref[2]=[row['H'] for row in c.execute(query)]
-  query=f'select*from sphere where n={nn[3]} and k={kk[3]}'
+  query=f'select*from fiber3 where n={nn[3]} and k={kk[3]}'
   table_ref[3]=[row['P'] for row in c.execute(query)]
   query=f'select*from sphere where n={nn[4]} and k={kk[4]}'
   table_ref[4]=[row['E'] for row in c.execute(query)]
@@ -556,6 +597,7 @@ def register():
 
   for i in range(6):
     if n%2==0 and (i==2 or i==5): continue
+    if i==0 or i==3: continue
     for j in range(hg[i].direct_sum()):
       table_gen[i].append(hg[i].rep_linear_tex(hg[i].gen_coe_list(j)))
       if i < 5: table_arrow[i].append('\longrightarrow')
@@ -567,44 +609,67 @@ def register():
       table_gen[2].extend(map(lambda x:f'[\iota_{ {n} },\iota_{ {n} }]'+x if x!='0' else '', table_gen[3]))
 
 
-  table_image[0]=[hg[1].rep_linear_tex(hg[1].gen_coe_to_rep_coe(hg[1].mod_gen_coe_list(hg[1].rep_coe_to_gen_coe(hg[0].gen_P_coe(j)[0]))))
-    for j in range(hg[0].direct_sum())]
-  table_image[4]=[hg[5].rep_linear_tex(hg[5].gen_coe_to_rep_coe(hg[5].mod_gen_coe_list(hg[5].rep_coe_to_gen_coe(hg[4].gen_P_coe(j)[0]))))
-    for j in range(hg[4].direct_sum())]
+  # table_image[0]=[hg[1].rep_linear_tex(hg[1].gen_coe_to_rep_coe(hg[1].mod_gen_coe_list(hg[1].rep_coe_to_gen_coe(hg[0].gen_P_coe(j)[0]))))
+  #   for j in range(hg[0].direct_sum())]
+  # table_image[4]=[hg[5].rep_linear_tex(hg[5].gen_coe_to_rep_coe(hg[5].mod_gen_coe_list(hg[5].rep_coe_to_gen_coe(hg[4].gen_P_coe(j)[0]))))
+  #   for j in range(hg[4].direct_sum())]
   
-  if nn[i]<=kk[i]+2:
+  if nn[1]<=kk[1]+2:
     table_image[1]=[hg[2].rep_linear_tex(hg[2].gen_coe_to_rep_coe(hg[2].mod_gen_coe_list(hg[2].rep_coe_to_gen_coe(hg[1].gen_E_coe(j)[0]))))
       for j in range(hg[1].direct_sum())]
-    table_image[4]=[hg[5].rep_linear_tex(hg[5].gen_coe_to_rep_coe(hg[5].mod_gen_coe_list(hg[5].rep_coe_to_gen_coe(hg[4].gen_E_coe(j)[0]))))
-      for j in range(hg[4].direct_sum())]
   else: 
     table_image[1]=table_gen[2]
 
-  table_image[2]=[hg[3].rep_linear_tex(hg[3].gen_coe_to_rep_coe(hg[3].mod_gen_coe_list(hg[3].rep_coe_to_gen_coe(hg[2].gen_H_coe(j)[0]))))
-    for j in range(hg[2].direct_sum())]
-  table_image[3]=[hg[4].rep_linear_tex(hg[4].gen_coe_to_rep_coe(hg[4].mod_gen_coe_list(hg[4].rep_coe_to_gen_coe(hg[3].gen_P_coe(j)[0]))))
-    for j in range(hg[3].direct_sum())]
+  if nn[4]<=kk[4]+2:
+    table_image[4]=[hg[5].rep_linear_tex(hg[5].gen_coe_to_rep_coe(hg[5].mod_gen_coe_list(hg[5].rep_coe_to_gen_coe(hg[4].gen_E_coe(j)[0]))))
+      for j in range(hg[4].direct_sum())]
+  else:
+    table_image[4]=table_gen[5]
+
+  # table_image[2]=[hg[3].rep_linear_tex(hg[3].gen_coe_to_rep_coe(hg[3].mod_gen_coe_list(hg[3].rep_coe_to_gen_coe(hg[2].gen_H_coe(j)[0]))))
+  #   for j in range(hg[2].direct_sum())]
+  # table_image[3]=[hg[4].rep_linear_tex(hg[4].gen_coe_to_rep_coe(hg[4].mod_gen_coe_list(hg[4].rep_coe_to_gen_coe(hg[3].gen_P_coe(j)[0]))))
+  #   for j in range(hg[3].direct_sum())]
   # table_image[4]=[hg[5].rep_linear_tex(hg[5].gen_coe_to_rep_coe(hg[5].mod_gen_coe_list(hg[5].rep_coe_to_gen_coe(hg[4].gen_P_coe(j)[0]))))
   #   for j in range(hg[4].direct_sum())]
   
   table_group=[[],[],[],[],[],[]]
   for i in range(6):
     if n%2==0 and i==2: continue
-    if nn[i]<=kk[i]+2: 
+    if i==0 or i==3: 
+      # continue
+      if nn[i]<=kk[i]+2: 
+        query=f'select*from fiber3 where n={nn[i]} and k={kk[i]}'
+      else: 
+        if kk[i]%2==1:
+          query=f'select*from fiber3 where n={kk[i]+2} and k={kk[i]}'
+        else:
+          query=f'select*from fiber3 where n={kk[i]+3} and k={kk[i]}'
+      for row in c.execute(query):
+        if row['orders'] == 0: table_group[i].append('0')
+        elif row['orders']==inf: table_group[i].append('Z')
+        else:
+          try:
+            orders=int(row['orders'])
+            table_group[i].append(f'Z_{ {orders} }')
+          except: table_group[i].append('')
+
+    elif nn[i]<=kk[i]+2: 
       query=f'select*from sphere where n={nn[i]} and k={kk[i]}'
     else: 
       if kk[i]%2==1:
         query=f'select*from sphere where n={kk[i]+2} and k={kk[i]}'
       else:
         query=f'select*from sphere where n={kk[i]+3} and k={kk[i]}'
-    for row in c.execute(query):
-      if row['orders'] == 0: table_group[i].append('0')
-      elif row['orders']==inf: table_group[i].append('Z')
-      else:
-        try:
-          orders=int(row['orders'])
-          table_group[i].append(f'Z_{ {orders} }')
-        except: table_group[i].append('')
+    if i!=0 and i!=3:
+      for row in c.execute(query):
+        if row['orders'] == 0: table_group[i].append('0')
+        elif row['orders']==inf: table_group[i].append('Z')
+        else:
+          try:
+            orders=int(row['orders'])
+            table_group[i].append(f'Z_{ {orders} }')
+          except: table_group[i].append('')
 
   if n%2==0:
     if nn[1]<=kk[1]+2:
