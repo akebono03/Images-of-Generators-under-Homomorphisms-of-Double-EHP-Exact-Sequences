@@ -206,9 +206,9 @@ def register():
       for i,elem in enumerate(el_li):
         gen_query=f'select*from gen where id="{elem}"'
         for row in c.execute(gen_query):
-          if row['kinds']==2:
-            res+='{ s }'
-          elif row['kinds']==0:
+          # if row['kinds']==2:
+          #   res+='{ s }'
+          if row['kinds']!=-1:
             if el_dim_li[i]< row['n']:res+='{'+row['latex'] +f'_{ {el_dim_li[i]} }'+'(Not Defined)}'
             elif i==0 or el_li[i-1]!=el_li[i]:sq_cnt=1
 #一番最初か、前のidと違うとき、カウントを１にする。
@@ -597,10 +597,15 @@ def register():
 
   for i in range(6):
     if n%2==0 and (i==2 or i==5): continue
-    if i==0 or i==3: continue
-    for j in range(hg[i].direct_sum()):
-      table_gen[i].append(hg[i].rep_linear_tex(hg[i].gen_coe_list(j)))
-      if i < 5: table_arrow[i].append('\longrightarrow')
+    if i==0 or i==3: 
+      # continue
+      query=f'select*from fiber3 where n={nn[i]} and k={kk[i]}'
+      table_gen[i].append([row['generator'] for row in c.execute(query)])
+      table_gen[i]=[row['generator'] for row in c.execute(query)]
+    else:
+      for j in range(hg[i].direct_sum()):
+        table_gen[i].append(hg[i].rep_linear_tex(hg[i].gen_coe_list(j)))
+        if i < 5: table_arrow[i].append('\longrightarrow')
   
   if n%2==0:
     if table_gen[1]!=['0']:
@@ -693,12 +698,192 @@ def register():
         table_image[i].append('')
         table_ref[i].append('')
 
+# IJ\Delta-sequence
+
+  if n%2==1:
+    nn2=[n-2,3*n-2,3*n-4,n-2,3*n-2,3*n-4]
+    kk2=[k,-2*n+k+3,-2*n+k+3,k-1,-2*n+k+2,-2*n+k+2]
+  else:
+    nn2=[0,n-1,n,2*n-1,0,0]
+    kk2=[0,k,k,k-n+1,0,0]
+  HoGroup2=[]
+  if n%2==1:
+    for i in range(6):
+      if i==0 or i==3:
+        txt_HoGroup2=' Q_{ {{nn1 + kk1}} }^{ {{nn1}} }'
+      else:
+        txt_HoGroup2=' \pi_{ {{nn1 + kk1}} }^{ {{nn1}} } '
+      tmp_HoGroup2=Template(txt_HoGroup2)
+      dict_HoGroup2={'nn1':nn2[i],'kk1':kk2[i]}
+      HoGroup2.append(tmp_HoGroup2.render(dict_HoGroup2))
+  else:
+    for i in range(5):
+      if i==0 or i==4:
+        txt_HoGroup2='0'
+      else:
+        txt_HoGroup2=' \pi_{ {{nn1 + kk1}} }^{ {{nn1}} } '
+      tmp_HoGroup2=Template(txt_HoGroup2)
+      dict_HoGroup2={'nn1':nn2[i],'kk1':kk2[i]}
+      HoGroup2.append(tmp_HoGroup2.render(dict_HoGroup2))
+
+  if n%2==1:
+    EHPmap2=['J','\Delta','I','J','\Delta']
+  else:
+    EHPmap2=['','E',f'[\iota_{ {n} },\iota_{ {n} }]','','']
+  Arrow2=[]
+  if n%2==1:
+    for i in range(5):
+      txt_Arrow2=' \stackrel{ {{map1}} }{\longrightarrow} '
+      tmp_Arrow2=Template(txt_Arrow2)
+      dict_Arrow2={'map1':EHPmap2[i]}
+      Arrow2.append(tmp_Arrow2.render(dict_Arrow2))
+  else:
+    for i in range(4):
+      if i==2:
+        txt_Arrow2=' \stackrel{ {{map1}} }{\longleftarrow}'
+      else:
+        txt_Arrow2=' \stackrel{ {{map1}} }{\longrightarrow} '
+      tmp_Arrow2=Template(txt_Arrow2)
+      dict_Arrow2={'map1':EHPmap2[i]}
+      Arrow2.append(tmp_Arrow2.render(dict_Arrow2))
+
+  for i in range(5):
+    if i==0: table2=HoGroup2[0]
+    else: table2=table2+" & & & "+Arrow2[i-1]+" & & & "+HoGroup2[i]
+  # if n%2==1:
+  #   table=table+" & & & "+Arrow[4]+" & & & "+HoGroup[5]
+
+  hg2=[HomotopyGroup(nn2[i],kk2[i]) for i in range(6)]
+
+  table_ref2=[[],[],[],[],[],[]]
+  query=f'select*from fiber3 where n={nn2[0]} and k={kk2[0]}'
+  table_ref2[0]=[row['P'] for row in c.execute(query)]
+  query=f'select*from sphere where n={nn2[1]} and k={kk2[1]}'
+  table_ref2[1]=[row['E'] for row in c.execute(query)]
+  query=f'select*from sphere where n={nn2[2]} and k={kk2[2]}'
+  table_ref2[2]=[row['H'] for row in c.execute(query)]
+  query=f'select*from fiber3 where n={nn2[3]} and k={kk2[3]}'
+  table_ref2[3]=[row['P'] for row in c.execute(query)]
+  query=f'select*from sphere where n={nn2[4]} and k={kk2[4]}'
+  table_ref2[4]=[row['E'] for row in c.execute(query)]
+
+  table_gen2=[[],[],[],[],[],[]]
+  table_arrow2=[[],[],[],[],[],[]]
+  table_image2=[[],[],[],[],[],[]]
+
+  for i in range(6):
+    if n%2==0 and (i==2 or i==5): continue
+    if i==0 or i==3: 
+      # continue
+      query=f'select*from fiber3 where n={nn2[i]} and k={kk2[i]}'
+      table_gen2[i].append([row['generator'] for row in c.execute(query)])
+      table_gen2[i]=[row['generator'] for row in c.execute(query)]
+    else:
+      for j in range(hg2[i].direct_sum()):
+        table_gen2[i].append(hg2[i].rep_linear_tex(hg2[i].gen_coe_list(j)))
+        if i < 5: table_arrow2[i].append('\longrightarrow')
+  
+  if n%2==0:
+    if table_gen2[1]!=['0']:
+      table_gen2[2].extend(map(lambda x:'E'+x if x!='0' else '', table_gen2[1]))
+    if table_gen2[3]!=['0']:
+      table_gen2[2].extend(map(lambda x:f'[\iota_{ {n} },\iota_{ {n} }]'+x if x!='0' else '', table_gen2[3]))
+
+
+  # table_image[0]=[hg2[1].rep_linear_tex(hg2[1].gen_coe_to_rep_coe(hg2[1].mod_gen_coe_list(hg2[1].rep_coe_to_gen_coe(hg2[0].gen_P_coe(j)[0]))))
+  #   for j in range(hg2[0].direct_sum())]
+  # table_image[4]=[hg2[5].rep_linear_tex(hg2[5].gen_coe_to_rep_coe(hg2[5].mod_gen_coe_list(hg2[5].rep_coe_to_gen_coe(hg2[4].gen_P_coe(j)[0]))))
+  #   for j in range(hg2[4].direct_sum())]
+  
+  # if nn2[1]<=kk2[1]+2:
+  #   table_image2[1]=[hg2[2].rep_linear_tex(hg2[2].gen_coe_to_rep_coe(hg2[2].mod_gen_coe_list(hg2[2].rep_coe_to_gen_coe(hg2[1].gen_E_coe(j)[0]))))
+  #     for j in range(hg2[1].direct_sum())]
+  # else: 
+  #   table_image2[1]=table_gen2[2]
+
+  # if nn2[4]<=kk2[4]+2:
+  #   table_image2[4]=[hg2[5].rep_linear_tex(hg2[5].gen_coe_to_rep_coe(hg2[5].mod_gen_coe_list(hg2[5].rep_coe_to_gen_coe(hg2[4].gen_E_coe(j)[0]))))
+  #     for j in range(hg2[4].direct_sum())]
+  # else:
+  #   table_image2[4]=table_gen2[5]
+
+  # table_image[2]=[hg2[3].rep_linear_tex(hg2[3].gen_coe_to_rep_coe(hg2[3].mod_gen_coe_list(hg2[3].rep_coe_to_gen_coe(hg2[2].gen_H_coe(j)[0]))))
+  #   for j in range(hg2[2].direct_sum())]
+  # table_image[3]=[hg2[4].rep_linear_tex(hg2[4].gen_coe_to_rep_coe(hg2[4].mod_gen_coe_list(hg2[4].rep_coe_to_gen_coe(hg2[3].gen_P_coe(j)[0]))))
+  #   for j in range(hg2[3].direct_sum())]
+  # table_image[4]=[hg2[5].rep_linear_tex(hg2[5].gen_coe_to_rep_coe(hg2[5].mod_gen_coe_list(hg2[5].rep_coe_to_gen_coe(hg2[4].gen_P_coe(j)[0]))))
+  #   for j in range(hg2[4].direct_sum())]
+  
+  table_group2=[[],[],[],[],[],[]]
+  for i in range(6):
+    if n%2==0 and i==2: continue
+    if i==0 or i==3: 
+      # continue
+      if nn2[i]<=kk2[i]+2: 
+        query=f'select*from fiber3 where n={nn2[i]} and k={kk2[i]}'
+      else: 
+        if kk2[i]%2==1:
+          query=f'select*from fiber3 where n={kk2[i]+2} and k={kk2[i]}'
+        else:
+          query=f'select*from fiber3 where n={kk2[i]+3} and k={kk2[i]}'
+      for row in c.execute(query):
+        if row['orders'] == 0: table_group2[i].append('0')
+        elif row['orders']==inf: table_group2[i].append('Z')
+        else:
+          try:
+            orders=int(row['orders'])
+            table_group2[i].append(f'Z_{ {orders} }')
+          except: table_group2[i].append('')
+
+    elif nn2[i]<=kk2[i]+2: 
+      query=f'select*from sphere where n={nn2[i]} and k={kk2[i]}'
+    else: 
+      if kk2[i]%2==1:
+        query=f'select*from sphere where n={kk2[i]+2} and k={kk2[i]}'
+      else:
+        query=f'select*from sphere where n={kk2[i]+3} and k={kk2[i]}'
+    if i!=0 and i!=3:
+      for row in c.execute(query):
+        if row['orders'] == 0: table_group2[i].append('0')
+        elif row['orders']==inf: table_group2[i].append('Z')
+        else:
+          try:
+            orders=int(row['orders'])
+            table_group2[i].append(f'Z_{ {orders} }')
+          except: table_group2[i].append('')
+
+  if n%2==0:
+    if nn2[1]<=kk2[1]+2:
+      if table_group2[1]!=['0']:
+        table_group2[2].extend(table_group2[1])
+    if nn2[2]<=kk2[2]+2:
+      if table_group2[3]!=['0']:
+        table_group2[2].extend(table_group2[3])
+    if table_group2[2]==[]:
+      table_group2[2].append('0')
+
+  # m_d_sum=hg2[2].max_direct_sum()
+  m_d_sum2=4
+
+  for i in range(6):
+    if len(table_arrow2[i])<m_d_sum:
+      for j in range(m_d_sum-len(table_arrow2[i])):
+        table_group2[i].append('')
+        table_gen2[i].append('')
+        table_arrow2[i].append('')
+        table_image2[i].append('')
+        table_ref2[i].append('')
+
   conn.close()
 
   return render_template('homotopy_group.html', n=n, k=k, m_d_sum=m_d_sum \
     , HoGroup=HoGroup, Arrow=Arrow \
     , table_group=table_group, table_gen=table_gen \
-    , table_arrow=table_arrow, table_image=table_image, table_ref=table_ref )
+    , table_arrow=table_arrow, table_image=table_image, table_ref=table_ref \
+    , m_d_sum2=m_d_sum2, HoGroup2=HoGroup2, Arrow2=Arrow2 \
+    , table_group2=table_group2, table_gen2=table_gen2 \
+    , table_arrow2=table_arrow2, table_image2=table_image2, table_ref2=table_ref2 
+    )
 
 if __name__=="__main__":
   app.run(debug=True)

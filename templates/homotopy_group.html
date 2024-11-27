@@ -52,7 +52,40 @@
         <td colspan="3"> \( \ {{ table_ref[5][j] }} \ \) </td>
     </tr>
     {% endfor %}
-</table>
+    <tr><td colspan="22">　</td></tr>
 
+    <tr>
+        {% for i in range(5) %}
+        <th width="60"><font color=orange> \( {{ HoGroup2[i] }} \) </font></th>
+        <th width="60"></th>
+        <th width="60"><font color=orange> \( {{ Arrow2[i] }} \) </font></th>
+        <th width="60"></th>
+        {% endfor %}
+        <th width="60"><font color=orange> \( {{ HoGroup2[5] }} \) </font></th>
+    </tr>
+    {% for j in range(m_d_sum) %}
+    <tr align="center">
+        {% for i in range(5) %}
+        <td><font color=orange> \( {{ table_group2[i][j] }} \) </font></td>
+        <td> \( {{ table_gen2[i][j] }} \) </td>
+        <td> \( {{ table_arrow2[i][j] }} \) </td>
+        <td> \( {{ table_image2[i][j] }} \) </td>
+        {% endfor %}
+        <td><font color=orange> \( {{ table_group2[5][j] }} \) </font></td>
+        <td width="60"> \( {{ table_gen2[5][j] }} \) </td>
+    </tr>
+    {% endfor %}
+    <tr><td colspan="22">　</td></tr>
+    {% for j in range(m_d_sum) %}
+    <tr>
+        {% for i in range(5) %}
+        <td></td>
+        <td colspan="3"> \( \ {{ table_ref2[i][j] }} \ \) </td>
+        {% endfor %}
+        <td></td>
+        <td colspan="3"> \( \ {{ table_ref2[5][j] }} \ \) </td>
+    </tr>
+    {% endfor %}
+</table>
 
 {% endblock %}
