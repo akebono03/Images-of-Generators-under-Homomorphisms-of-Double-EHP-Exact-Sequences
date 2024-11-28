@@ -524,366 +524,259 @@ def register():
 
 ###########################################################
 
-  if n%2==1:
-    nn=[n-2,n-2,n,n-2,n-2,n]
-    kk=[k,k,k,k-1,k-1,k-1]
-  else:
-    nn=[0,n-1,n,2*n-1,0,0]
-    kk=[0,k,k,k-n+1,0,0]
-  HoGroup=[]
-  if n%2==1:
-    for i in range(6):
-      if i==0 or i==3:
-        txt_HoGroup=' Q_{ {{nn1 + kk1}} }^{ {{nn1}} }'
+  # 汎用的なホモトピー群作成関数
+  def create_hogroup(n,k,odd,group_type='hogroup'):
+    if odd:
+      if group_type=='hogroup':
+        nn=[n-2,n-2,n,n-2,n-2,n]
+        kk=[k,k,k,k-1,k-1,k-1]
+        txt_templates=[' Q_{ {{nn1 + kk1}} }^{ {{nn1}} }' if i%3==0 else ' \pi_{ {{nn1 + kk1}} }^{ {{nn1}} } ' for i in range(6)]
+      elif group_type=='hogroup2':
+        nn=[n+2,n,n,n+2,n,n]
+        kk=[k+1,k,k,k,k-1,k-1]
+        txt_templates=[' Q_{ {{nn1 + kk1}} }^{ {{nn1}} }' if i%3==1 else ' \pi_{ {{nn1 + kk1}} }^{ {{nn1}} } ' for i in range(6)]
       else:
-        txt_HoGroup=' \pi_{ {{nn1 + kk1}} }^{ {{nn1}} } '
-      tmp_HoGroup=Template(txt_HoGroup)
-      dict_HoGroup={'nn1':nn[i],'kk1':kk[i]}
-      HoGroup.append(tmp_HoGroup.render(dict_HoGroup))
-  else:
-    for i in range(5):
-      if i==0 or i==4:
-        txt_HoGroup='0'
-      else:
-        txt_HoGroup=' \pi_{ {{nn1 + kk1}} }^{ {{nn1}} } '
-      tmp_HoGroup=Template(txt_HoGroup)
-      dict_HoGroup={'nn1':nn[i],'kk1':kk[i]}
-      HoGroup.append(tmp_HoGroup.render(dict_HoGroup))
-
-  if n%2==1:
-    EHPmap=['P','E^{2}','H','P','E^{2}']
-  else:
-    EHPmap=['','E',f'[\iota_{ {n} },\iota_{ {n} }]','','']
-  Arrow=[]
-  if n%2==1:
-    for i in range(5):
-      txt_Arrow=' \stackrel{ {{map1}} }{\longrightarrow} '
-      tmp_Arrow=Template(txt_Arrow)
-      dict_Arrow={'map1':EHPmap[i]}
-      Arrow.append(tmp_Arrow.render(dict_Arrow))
-  else:
-    for i in range(4):
-      if i==2:
-        txt_Arrow=' \stackrel{ {{map1}} }{\longleftarrow}'
-      else:
-        txt_Arrow=' \stackrel{ {{map1}} }{\longrightarrow} '
-      tmp_Arrow=Template(txt_Arrow)
-      dict_Arrow={'map1':EHPmap[i]}
-      Arrow.append(tmp_Arrow.render(dict_Arrow))
-
-  for i in range(5):
-    if i==0: table=HoGroup[0]
-    else: table=table+" & & & "+Arrow[i-1]+" & & & "+HoGroup[i]
-  # if n%2==1:
-  #   table=table+" & & & "+Arrow[4]+" & & & "+HoGroup[5]
-
-  hg=[HomotopyGroup(nn[i],kk[i]) for i in range(6)]
-
-  table_ref=[[],[],[],[],[],[]]
-  query=f'select*from fiber3 where n={nn[0]} and k={kk[0]}'
-  table_ref[0]=[row['P'] for row in c.execute(query)]
-  query=f'select*from sphere where n={nn[1]} and k={kk[1]}'
-  table_ref[1]=[row['E'] for row in c.execute(query)]
-  query=f'select*from sphere where n={nn[2]} and k={kk[2]}'
-  table_ref[2]=[row['H'] for row in c.execute(query)]
-  query=f'select*from fiber3 where n={nn[3]} and k={kk[3]}'
-  table_ref[3]=[row['P'] for row in c.execute(query)]
-  query=f'select*from sphere where n={nn[4]} and k={kk[4]}'
-  table_ref[4]=[row['E'] for row in c.execute(query)]
-
-  table_gen=[[],[],[],[],[],[]]
-  table_arrow=[[],[],[],[],[],[]]
-  table_image=[[],[],[],[],[],[]]
-
-  for i in range(6):
-    if n%2==0 and (i==2 or i==5): continue
-    if i==0 or i==3: 
-      # continue
-      query=f'select*from fiber3 where n={nn[i]} and k={kk[i]}'
-      table_gen[i].append([row['generator'] for row in c.execute(query)])
-      table_gen[i]=[row['generator'] for row in c.execute(query)]
+        nn=[n-2,3*n-2,3*n-4,n-2,3*n-2,3*n-4]
+        kk=[k,-2*n+k+3,-2*n+k+3,k-1,-2*n+k+2,-2*n+k+2]
+        txt_templates=[' Q_{ {{nn1 + kk1}} }^{ {{nn1}} }' if i%3==0 else ' \pi_{ {{nn1 + kk1}} }^{ {{nn1}} } ' for i in range(6)]
     else:
-      for j in range(hg[i].direct_sum()):
-        table_gen[i].append(hg[i].rep_linear_tex(hg[i].gen_coe_list(j)))
-        if i < 5: table_arrow[i].append('\longrightarrow')
-  
-  if n%2==0:
-    if table_gen[1]!=['0']:
-      table_gen[2].extend(map(lambda x:'E'+x if x!='0' else '', table_gen[1]))
-    if table_gen[3]!=['0']:
-      table_gen[2].extend(map(lambda x:f'[\iota_{ {n} },\iota_{ {n} }]'+x if x!='0' else '', table_gen[3]))
+      nn=[0,n-1,n,2*n-1,0,0]
+      kk=[0,k,k,k-n+1,0,0]
+      txt_templates=['0' if i%4==0 else ' \pi_{ {{nn1 + kk1}} }^{ {{nn1}} } ' for i in range(6)]
 
+    hogroup=[]
+    for i in range(6 if odd else 5):
+      template=Template(txt_templates[i])
+      rendered=template.render({'nn1':nn[i],'kk1':kk[i]})
+      hogroup.append(rendered)
+    return nn,kk,hogroup
 
-  # table_image[0]=[hg[1].rep_linear_tex(hg[1].gen_coe_to_rep_coe(hg[1].mod_gen_coe_list(hg[1].rep_coe_to_gen_coe(hg[0].gen_P_coe(j)[0]))))
-  #   for j in range(hg[0].direct_sum())]
-  # table_image[4]=[hg[5].rep_linear_tex(hg[5].gen_coe_to_rep_coe(hg[5].mod_gen_coe_list(hg[5].rep_coe_to_gen_coe(hg[4].gen_P_coe(j)[0]))))
-  #   for j in range(hg[4].direct_sum())]
-  
-  if nn[1]<=kk[1]+2:
-    table_image[1]=[hg[2].rep_linear_tex(hg[2].gen_coe_to_rep_coe(hg[2].mod_gen_coe_list(hg[2].rep_coe_to_gen_coe(hg[1].gen_E_coe(j)[0]))))
-      for j in range(hg[1].direct_sum())]
-  else: 
-    table_image[1]=table_gen[2]
-
-  if nn[4]<=kk[4]+2:
-    table_image[4]=[hg[5].rep_linear_tex(hg[5].gen_coe_to_rep_coe(hg[5].mod_gen_coe_list(hg[5].rep_coe_to_gen_coe(hg[4].gen_E_coe(j)[0]))))
-      for j in range(hg[4].direct_sum())]
-  else:
-    table_image[4]=table_gen[5]
-
-  # table_image[2]=[hg[3].rep_linear_tex(hg[3].gen_coe_to_rep_coe(hg[3].mod_gen_coe_list(hg[3].rep_coe_to_gen_coe(hg[2].gen_H_coe(j)[0]))))
-  #   for j in range(hg[2].direct_sum())]
-  # table_image[3]=[hg[4].rep_linear_tex(hg[4].gen_coe_to_rep_coe(hg[4].mod_gen_coe_list(hg[4].rep_coe_to_gen_coe(hg[3].gen_P_coe(j)[0]))))
-  #   for j in range(hg[3].direct_sum())]
-  # table_image[4]=[hg[5].rep_linear_tex(hg[5].gen_coe_to_rep_coe(hg[5].mod_gen_coe_list(hg[5].rep_coe_to_gen_coe(hg[4].gen_P_coe(j)[0]))))
-  #   for j in range(hg[4].direct_sum())]
-  
-  table_group=[[],[],[],[],[],[]]
-  for i in range(6):
-    if n%2==0 and i==2: continue
-    if i==0 or i==3: 
-      # continue
-      if nn[i]<=kk[i]+2: 
-        query=f'select*from fiber3 where n={nn[i]} and k={kk[i]}'
-      else: 
-        if kk[i]%2==1:
-          query=f'select*from fiber3 where n={kk[i]+2} and k={kk[i]}'
-        else:
-          query=f'select*from fiber3 where n={kk[i]+3} and k={kk[i]}'
-      for row in c.execute(query):
-        if row['orders'] == 0: table_group[i].append('0')
-        elif row['orders']==inf: table_group[i].append('Z')
-        else:
-          try:
-            orders=int(row['orders'])
-            table_group[i].append(f'Z_{ {orders} }')
-          except: table_group[i].append('')
-
-    elif nn[i]<=kk[i]+2: 
-      query=f'select*from sphere where n={nn[i]} and k={kk[i]}'
-    else: 
-      if kk[i]%2==1:
-        query=f'select*from sphere where n={kk[i]+2} and k={kk[i]}'
+  # 汎用的なEHPマップと矢印作成関数
+  def create_ehp_map_and_arrows(n,odd,group_type='hogroup'):
+    if odd:
+      ehp_map=[]
+      if group_type=='hogroup':
+        ehp_map=['P','E^{2}','H','P','E^{2}']
+      elif group_type=='hogroup2':
+        ehp_map=['H','P','E^{2}','H','P']
       else:
-        query=f'select*from sphere where n={kk[i]+3} and k={kk[i]}'
-    if i!=0 and i!=3:
-      for row in c.execute(query):
-        if row['orders'] == 0: table_group[i].append('0')
-        elif row['orders']==inf: table_group[i].append('Z')
-        else:
-          try:
-            orders=int(row['orders'])
-            table_group[i].append(f'Z_{ {orders} }')
-          except: table_group[i].append('')
-
-  if n%2==0:
-    if nn[1]<=kk[1]+2:
-      if table_group[1]!=['0']:
-        table_group[2].extend(table_group[1])
-    if nn[2]<=kk[2]+2:
-      if table_group[3]!=['0']:
-        table_group[2].extend(table_group[3])
-    if table_group[2]==[]:
-      table_group[2].append('0')
-
-  # m_d_sum=hg[2].max_direct_sum()
-  m_d_sum=4
-
-  for i in range(6):
-    if len(table_arrow[i])<m_d_sum:
-      for j in range(m_d_sum-len(table_arrow[i])):
-        table_group[i].append('')
-        table_gen[i].append('')
-        table_arrow[i].append('')
-        table_image[i].append('')
-        table_ref[i].append('')
-
-# IJ\Delta-sequence
-
-  if n%2==1:
-    nn2=[n-2,3*n-2,3*n-4,n-2,3*n-2,3*n-4]
-    kk2=[k,-2*n+k+3,-2*n+k+3,k-1,-2*n+k+2,-2*n+k+2]
-  else:
-    nn2=[0,n-1,n,2*n-1,0,0]
-    kk2=[0,k,k,k-n+1,0,0]
-  HoGroup2=[]
-  if n%2==1:
-    for i in range(6):
-      if i==0 or i==3:
-        txt_HoGroup2=' Q_{ {{nn1 + kk1}} }^{ {{nn1}} }'
-      else:
-        txt_HoGroup2=' \pi_{ {{nn1 + kk1}} }^{ {{nn1}} } '
-      tmp_HoGroup2=Template(txt_HoGroup2)
-      dict_HoGroup2={'nn1':nn2[i],'kk1':kk2[i]}
-      HoGroup2.append(tmp_HoGroup2.render(dict_HoGroup2))
-  else:
-    for i in range(5):
-      if i==0 or i==4:
-        txt_HoGroup2='0'
-      else:
-        txt_HoGroup2=' \pi_{ {{nn1 + kk1}} }^{ {{nn1}} } '
-      tmp_HoGroup2=Template(txt_HoGroup2)
-      dict_HoGroup2={'nn1':nn2[i],'kk1':kk2[i]}
-      HoGroup2.append(tmp_HoGroup2.render(dict_HoGroup2))
-
-  if n%2==1:
-    EHPmap2=['J','\Delta','I','J','\Delta']
-  else:
-    EHPmap2=['','E',f'[\iota_{ {n} },\iota_{ {n} }]','','']
-  Arrow2=[]
-  if n%2==1:
-    for i in range(5):
-      txt_Arrow2=' \stackrel{ {{map1}} }{\longrightarrow} '
-      tmp_Arrow2=Template(txt_Arrow2)
-      dict_Arrow2={'map1':EHPmap2[i]}
-      Arrow2.append(tmp_Arrow2.render(dict_Arrow2))
-  else:
-    for i in range(4):
-      if i==2:
-        txt_Arrow2=' \stackrel{ {{map1}} }{\longleftarrow}'
-      else:
-        txt_Arrow2=' \stackrel{ {{map1}} }{\longrightarrow} '
-      tmp_Arrow2=Template(txt_Arrow2)
-      dict_Arrow2={'map1':EHPmap2[i]}
-      Arrow2.append(tmp_Arrow2.render(dict_Arrow2))
-
-  for i in range(5):
-    if i==0: table2=HoGroup2[0]
-    else: table2=table2+" & & & "+Arrow2[i-1]+" & & & "+HoGroup2[i]
-  # if n%2==1:
-  #   table=table+" & & & "+Arrow[4]+" & & & "+HoGroup[5]
-
-  hg2=[HomotopyGroup(nn2[i],kk2[i]) for i in range(6)]
-
-  table_ref2=[[],[],[],[],[],[]]
-  query=f'select*from fiber3 where n={nn2[0]} and k={kk2[0]}'
-  table_ref2[0]=[row['P'] for row in c.execute(query)]
-  query=f'select*from sphere where n={nn2[1]} and k={kk2[1]}'
-  table_ref2[1]=[row['E'] for row in c.execute(query)]
-  query=f'select*from sphere where n={nn2[2]} and k={kk2[2]}'
-  table_ref2[2]=[row['H'] for row in c.execute(query)]
-  query=f'select*from fiber3 where n={nn2[3]} and k={kk2[3]}'
-  table_ref2[3]=[row['P'] for row in c.execute(query)]
-  query=f'select*from sphere where n={nn2[4]} and k={kk2[4]}'
-  table_ref2[4]=[row['E'] for row in c.execute(query)]
-
-  table_gen2=[[],[],[],[],[],[]]
-  table_arrow2=[[],[],[],[],[],[]]
-  table_image2=[[],[],[],[],[],[]]
-
-  for i in range(6):
-    if n%2==0 and (i==2 or i==5): continue
-    if i==0 or i==3: 
-      # continue
-      query=f'select*from fiber3 where n={nn2[i]} and k={kk2[i]}'
-      table_gen2[i].append([row['generator'] for row in c.execute(query)])
-      table_gen2[i]=[row['generator'] for row in c.execute(query)]
+        ehp_map=['J','\Delta','I','J','\Delta']
+      arrow_template=[' \stackrel{ {{map1}} }{\longrightarrow} ' for _ in range(len(ehp_map))]
     else:
-      for j in range(hg2[i].direct_sum()):
-        table_gen2[i].append(hg2[i].rep_linear_tex(hg2[i].gen_coe_list(j)))
-        if i < 5: table_arrow2[i].append('\longrightarrow')
-  
-  if n%2==0:
-    if table_gen2[1]!=['0']:
-      table_gen2[2].extend(map(lambda x:'E'+x if x!='0' else '', table_gen2[1]))
-    if table_gen2[3]!=['0']:
-      table_gen2[2].extend(map(lambda x:f'[\iota_{ {n} },\iota_{ {n} }]'+x if x!='0' else '', table_gen2[3]))
+      ehp_map=['','E',f'[\iota_{ {n} },\iota_{ {n} }]','','']
+      arrow_template=[' \stackrel{ {{map1}} }{\longleftarrow}' if group_type=='hogroup' and i==2 else ' \stackrel{ {{map1}} }{\longrightarrow} ' for i in range(len(ehp_map))]
+    arrow_template=[Template(arrow_template[i]) for i in range(len(ehp_map))]
+    arrows=[arrow_template[i].render({'map1':ehp_map[i]}) for i in range(len(ehp_map))]
+    return ehp_map,arrows
 
+  # テーブル作成
+  def create_table(hogroup,arrows):
+    table=hogroup[0]
+    for i in range(1,len(hogroup)):
+      table+=f" & & & {arrows[i-1]} & & & {hogroup[i]}"
+    return table
 
-  # table_image[0]=[hg2[1].rep_linear_tex(hg2[1].gen_coe_to_rep_coe(hg2[1].mod_gen_coe_list(hg2[1].rep_coe_to_gen_coe(hg2[0].gen_P_coe(j)[0]))))
-  #   for j in range(hg2[0].direct_sum())]
-  # table_image[4]=[hg2[5].rep_linear_tex(hg2[5].gen_coe_to_rep_coe(hg2[5].mod_gen_coe_list(hg2[5].rep_coe_to_gen_coe(hg2[4].gen_P_coe(j)[0]))))
-  #   for j in range(hg2[4].direct_sum())]
-  
-  # if nn2[1]<=kk2[1]+2:
-  #   table_image2[1]=[hg2[2].rep_linear_tex(hg2[2].gen_coe_to_rep_coe(hg2[2].mod_gen_coe_list(hg2[2].rep_coe_to_gen_coe(hg2[1].gen_E_coe(j)[0]))))
-  #     for j in range(hg2[1].direct_sum())]
-  # else: 
-  #   table_image2[1]=table_gen2[2]
+  # 汎用的なデータベースクエリ処理
+  def fetch_table_ref(c,nn,kk,group_type='hogroup'):
+    """
+    nn と kk のリストに基づいてデータベースからデータを取得する。
+    fiber3 と sphere テーブルを切り替えながら、table_ref を構築する。
 
-  # if nn2[4]<=kk2[4]+2:
-  #   table_image2[4]=[hg2[5].rep_linear_tex(hg2[5].gen_coe_to_rep_coe(hg2[5].mod_gen_coe_list(hg2[5].rep_coe_to_gen_coe(hg2[4].gen_E_coe(j)[0]))))
-  #     for j in range(hg2[4].direct_sum())]
-  # else:
-  #   table_image2[4]=table_gen2[5]
+    Args:
+        c: データベース接続オブジェクト
+        nn: n のリスト
+        kk: k のリスト
 
-  # table_image[2]=[hg2[3].rep_linear_tex(hg2[3].gen_coe_to_rep_coe(hg2[3].mod_gen_coe_list(hg2[3].rep_coe_to_gen_coe(hg2[2].gen_H_coe(j)[0]))))
-  #   for j in range(hg2[2].direct_sum())]
-  # table_image[3]=[hg2[4].rep_linear_tex(hg2[4].gen_coe_to_rep_coe(hg2[4].mod_gen_coe_list(hg2[4].rep_coe_to_gen_coe(hg2[3].gen_P_coe(j)[0]))))
-  #   for j in range(hg2[3].direct_sum())]
-  # table_image[4]=[hg2[5].rep_linear_tex(hg2[5].gen_coe_to_rep_coe(hg2[5].mod_gen_coe_list(hg2[5].rep_coe_to_gen_coe(hg2[4].gen_P_coe(j)[0]))))
-  #   for j in range(hg2[4].direct_sum())]
-  
-  table_group2=[[],[],[],[],[],[]]
-  for i in range(6):
-    if n%2==0 and i==2: continue
-    if i==0 or i==3: 
-      # continue
-      if nn2[i]<=kk2[i]+2: 
-        query=f'select*from fiber3 where n={nn2[i]} and k={kk2[i]}'
-      else: 
-        if kk2[i]%2==1:
-          query=f'select*from fiber3 where n={kk2[i]+2} and k={kk2[i]}'
+    Returns:
+        table_ref: 各 n, k に対応するデータのリスト
+    """
+    table_ref=[[] for _ in range(len(nn))]
+    if group_type=='hogroup':
+      for i in range(len(nn)):
+        if i%3==0:  # fiber3 テーブルを使用
+          query=f"select * from fiber3 where n={nn[i]} and k={kk[i]}"
+          key='P'
+        else:  # sphere テーブルを使用
+          query=f"select * from sphere where n={nn[i]} and k={kk[i]}"
+          key='E' if i%3==1 else 'H'  # sphere テーブルのカラム名を切り替え
+        table_ref[i]=[row[key] for row in c.execute(query)]
+    elif group_type=='hogroup2':
+      for i in range(len(nn)):
+        if i%3==1:  # fiber3 テーブルを使用
+          query=f"select * from fiber3 where n={nn[i]} and k={kk[i]}"
+          key='P'
+        else:  # sphere テーブルを使用
+          query=f"select * from sphere where n={nn[i]} and k={kk[i]}"
+          key='E' if i%3==2 else 'H'  # sphere テーブルのカラム名を切り替え
+        table_ref[i]=[row[key] for row in c.execute(query)]
+    return table_ref
+
+  # ジェネレーター、イメージ、矢印作成
+  def create_table_gen_images_and_arrows(hg,nn,kk,odd,group_type='hogroup'):
+    table_gen=[[] for _ in range(6)]
+    table_image=[[] for _ in range(6)]
+    table_arrow=[[] for _ in range(6)]
+
+    for i in range(6):
+      if not odd:
+        if not (i==1 or i==3): continue
+        for j in range(hg[i].direct_sum()):
+          table_gen[i].append(hg[i].rep_linear_tex(hg[i].gen_coe_list(j)))
+      elif group_type=='hogroup' or group_type=='hogroup3':
+        if i==0 or i==3: 
+          query=f"select * from 'fiber3' where n={nn[i]} and k={kk[i]}"
+          table_gen[i].append([row['generator'] for row in c.execute(query)])
+          table_gen[i]=[row['generator'] for row in c.execute(query)]
         else:
-          query=f'select*from fiber3 where n={kk2[i]+3} and k={kk2[i]}'
-      for row in c.execute(query):
-        if row['orders'] == 0: table_group2[i].append('0')
-        elif row['orders']==inf: table_group2[i].append('Z')
+          for j in range(hg[i].direct_sum()):
+            table_gen[i].append(hg[i].rep_linear_tex(hg[i].gen_coe_list(j)))
+            if i<5:
+              table_arrow[i].append('\longrightarrow')
+      elif group_type=='hogroup2':
+        if i==1 or i==4: 
+          query=f"select * from 'fiber3' where n={nn[i]} and k={kk[i]}"
+          table_gen[i].append([row['generator'] for row in c.execute(query)])
+          table_gen[i]=[row['generator'] for row in c.execute(query)]
         else:
-          try:
-            orders=int(row['orders'])
-            table_group2[i].append(f'Z_{ {orders} }')
-          except: table_group2[i].append('')
+          for j in range(hg[i].direct_sum()):
+            table_gen[i].append(hg[i].rep_linear_tex(hg[i].gen_coe_list(j)))
+            if i<5:
+              table_arrow[i].append('\longrightarrow')
 
-    elif nn2[i]<=kk2[i]+2: 
-      query=f'select*from sphere where n={nn2[i]} and k={kk2[i]}'
-    else: 
-      if kk2[i]%2==1:
-        query=f'select*from sphere where n={kk2[i]+2} and k={kk2[i]}'
+    # even の場合の特殊処理
+    if not odd:
+      if table_gen[1]!=['0']:
+        table_gen[2].extend(map(lambda x: 'E'+x if x and x!='0' else '', table_gen[1]))
+      if table_gen[3]!=['0']:
+        table_gen[2].extend(map(lambda x: f'[\iota_{ {n} },\iota_{ {n} }]'+x if x and x!='0' else '', table_gen[3]))
+
+    # 'hogroup' のときだけ特別なロジックを適用
+    if group_type=='hogroup':
+      if nn[1]<=kk[1]+2:
+        table_image[1]=[
+          hg[2].rep_linear_tex(
+            hg[2].gen_coe_to_rep_coe(
+              hg[2].mod_gen_coe_list(
+                hg[2].rep_coe_to_gen_coe(hg[1].gen_E_coe(j)[0])
+              )
+            )
+          )
+          for j in range(hg[1].direct_sum())
+        ]
       else:
-        query=f'select*from sphere where n={kk2[i]+3} and k={kk2[i]}'
-    if i!=0 and i!=3:
-      for row in c.execute(query):
-        if row['orders'] == 0: table_group2[i].append('0')
-        elif row['orders']==inf: table_group2[i].append('Z')
+        table_image[1]=table_gen[2]
+
+      if nn[4]<=kk[4]+2:
+        table_image[4]=[
+          hg[5].rep_linear_tex(
+            hg[5].gen_coe_to_rep_coe(
+              hg[5].mod_gen_coe_list(
+                hg[5].rep_coe_to_gen_coe(hg[4].gen_E_coe(j)[0])
+              )
+            )
+          )
+          for j in range(hg[4].direct_sum())
+        ]
+      else:
+        table_image[4]=table_gen[5]
+    elif group_type=='hogroup2':
+      if nn[2]<=kk[2]+2:
+        table_image[2]=[
+          hg[3].rep_linear_tex(
+            hg[3].gen_coe_to_rep_coe(
+              hg[3].mod_gen_coe_list(
+                hg[3].rep_coe_to_gen_coe(hg[2].gen_E_coe(j)[0])
+              )
+            )
+          )
+          for j in range(hg[2].direct_sum())
+        ]
+      else:
+        table_image[2]=table_gen[3]
+
+    return table_gen,table_image,table_arrow
+
+  # 群データ作成
+  def populate_table_group(c,nn,kk,hg,odd,group_type='hogroup'):
+    table_group=[[] for _ in range(6)]
+
+    for i in range(6):
+      if not odd and i==2:
+        continue
+      if group_type=='hogroup' or group_type=='hogroup3':
+        if nn[i]<=kk[i]+2:
+          query=f"select * from {'fiber3' if odd and i%3==0 else 'sphere'} where n={nn[i]} and k={kk[i]}"
         else:
-          try:
-            orders=int(row['orders'])
-            table_group2[i].append(f'Z_{ {orders} }')
-          except: table_group2[i].append('')
+          offset=2 if kk[i]%2==1 else 3
+          query=f"select * from {'fiber3' if odd and i%3==0 else 'sphere'} where n={kk[i]+offset} and k={kk[i]}"
+        for row in c.execute(query):
+          if row['orders']==0:
+            table_group[i].append('0')
+          elif row['orders']==float('inf'):
+            table_group[i].append('Z')
+          else:
+            table_group[i].append(f"Z_{int(row['orders'])}")
+      else:
+        if nn[i]<=kk[i]+2:
+          query=f"select * from {'fiber3' if odd and i%3==1 else 'sphere'} where n={nn[i]} and k={kk[i]}"
+        else:
+          offset=2 if kk[i]%2==1 else 3
+          query=f"select * from {'fiber3' if odd and i%3==1 else 'sphere'} where n={kk[i]+offset} and k={kk[i]}"
+        for row in c.execute(query):
+          if row['orders']==0:
+            table_group[i].append('0')
+          elif row['orders']==float('inf'):
+            table_group[i].append('Z')
+          else:
+            table_group[i].append(f"Z_{int(row['orders'])}")
 
-  if n%2==0:
-    if nn2[1]<=kk2[1]+2:
-      if table_group2[1]!=['0']:
-        table_group2[2].extend(table_group2[1])
-    if nn2[2]<=kk2[2]+2:
-      if table_group2[3]!=['0']:
-        table_group2[2].extend(table_group2[3])
-    if table_group2[2]==[]:
-      table_group2[2].append('0')
+    if not odd:
+      if nn[1]<=kk[1]+2:
+        if table_group[1]!=['0']:
+          table_group[2].extend(table_group[1])
+      if nn[2]<=kk[2]+2:
+        if table_group[3]!=['0']:
+          table_group[2].extend(table_group[3])
+      if table_group[2]==[]:
+        table_group[2].append('0')
 
-  # m_d_sum=hg2[2].max_direct_sum()
-  m_d_sum2=4
+    return table_group
 
-  for i in range(6):
-    if len(table_arrow2[i])<m_d_sum:
-      for j in range(m_d_sum-len(table_arrow2[i])):
-        table_group2[i].append('')
-        table_gen2[i].append('')
-        table_arrow2[i].append('')
-        table_image2[i].append('')
-        table_ref2[i].append('')
+  # シーケンス処理
+  def process_sequence(n,k,c,group_type='hogroup'):
+    odd=n%2==1
+    nn,kk,hogroup=create_hogroup(n,k,odd,group_type)
+    ehp_map,arrows=create_ehp_map_and_arrows(n,odd,group_type)
+    table=create_table(hogroup,arrows)
+    table_ref=fetch_table_ref(c,nn,kk,group_type)
+    hg=[HomotopyGroup(nn[i],kk[i]) for i in range(6)]
+    table_gen,table_image,table_arrow=create_table_gen_images_and_arrows(hg,nn,kk,odd,group_type)
+    table_group=populate_table_group(c,nn,kk,hg,odd,group_type)
+    return nn,kk,hogroup,arrows,table,table_ref,table_gen,table_image,table_arrow,table_group
+
+  # メイン処理
+  nn1,kk1,HoGroup1,Arrow1,table1,table_ref1,table_gen1,table_image1,table_arrow1,table_group1=process_sequence(n,k,c,'hogroup')
+  nn2,kk2,HoGroup2,Arrow2,table2,table_ref2,table_gen2,table_image2,table_arrow2,table_group2=process_sequence(n,k,c,'hogroup2')
+  nn3,kk3,HoGroup3,Arrow3,table3,table_ref3,table_gen3,table_image3,table_arrow3,table_group3=process_sequence(n,k,c,'hogroup3')
 
   conn.close()
 
+  m_d_sum=3
+  m_d_sum2=3
+  m_d_sum3=2
+
   return render_template('homotopy_group.html', n=n, k=k, m_d_sum=m_d_sum \
-    , HoGroup=HoGroup, Arrow=Arrow \
-    , table_group=table_group, table_gen=table_gen \
-    , table_arrow=table_arrow, table_image=table_image, table_ref=table_ref \
+    , HoGroup=HoGroup1, Arrow=Arrow1 \
+    , table_group=table_group1, table_gen=table_gen1 \
+    , table_arrow=table_arrow1, table_image=table_image1, table_ref=table_ref1 \
     , m_d_sum2=m_d_sum2, HoGroup2=HoGroup2, Arrow2=Arrow2 \
     , table_group2=table_group2, table_gen2=table_gen2 \
-    , table_arrow2=table_arrow2, table_image2=table_image2, table_ref2=table_ref2 
+    , table_arrow2=table_arrow2, table_image2=table_image2, table_ref2=table_ref2 \
+    , m_d_sum3=m_d_sum3, HoGroup3=HoGroup3, Arrow3=Arrow3 \
+    , table_group3=table_group3, table_gen3=table_gen3 \
+    , table_arrow3=table_arrow3, table_image3=table_image3, table_ref3=table_ref3 
     )
 
 if __name__=="__main__":
   app.run(debug=True)
+

@@ -7,6 +7,9 @@
             color: red;
             font-size: 100%;
         }
+        table {
+            font-size: 14px;
+        }
     </style>
 </header>
 
@@ -63,7 +66,7 @@
         {% endfor %}
         <th width="60"><font color=orange> \( {{ HoGroup2[5] }} \) </font></th>
     </tr>
-    {% for j in range(m_d_sum) %}
+    {% for j in range(m_d_sum2) %}
     <tr align="center">
         {% for i in range(5) %}
         <td><font color=orange> \( {{ table_group2[i][j] }} \) </font></td>
@@ -76,7 +79,7 @@
     </tr>
     {% endfor %}
     <tr><td colspan="22">　</td></tr>
-    {% for j in range(m_d_sum) %}
+    {% for j in range(m_d_sum2) %}
     <tr>
         {% for i in range(5) %}
         <td></td>
@@ -84,6 +87,40 @@
         {% endfor %}
         <td></td>
         <td colspan="3"> \( \ {{ table_ref2[5][j] }} \ \) </td>
+    </tr>
+    {% endfor %}
+    <tr><td colspan="22">　</td></tr>
+
+    <tr>
+        {% for i in range(5) %}
+        <th width="60"><font color=blue> \( {{ HoGroup3[i] }} \) </font></th>
+        <th width="60"></th>
+        <th width="60"><font color=blue> \( {{ Arrow3[i] }} \) </font></th>
+        <th width="60"></th>
+        {% endfor %}
+        <th width="60"><font color=blue> \( {{ HoGroup3[5] }} \) </font></th>
+    </tr>
+    {% for j in range(m_d_sum3) %}
+    <tr align="center">
+        {% for i in range(5) %}
+        <td><font color=blue> \( {{ table_group3[i][j] }} \) </font></td>
+        <td> \( {{ table_gen3[i][j] }} \) </td>
+        <td> \( {{ table_arrow3[i][j] }} \) </td>
+        <td> \( {{ table_image3[i][j] }} \) </td>
+        {% endfor %}
+        <td><font color=blue> \( {{ table_group3[5][j] }} \) </font></td>
+        <td width="60"> \( {{ table_gen3[5][j] }} \) </td>
+    </tr>
+    {% endfor %}
+    <tr><td colspan="22">　</td></tr>
+    {% for j in range(m_d_sum3) %}
+    <tr>
+        {% for i in range(5) %}
+        <td></td>
+        <td colspan="3"> \( \ {{ table_ref3[i][j] }} \ \) </td>
+        {% endfor %}
+        <td></td>
+        <td colspan="3"> \( \ {{ table_ref3[5][j] }} \ \) </td>
     </tr>
     {% endfor %}
 </table>
