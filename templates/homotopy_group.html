@@ -15,11 +15,15 @@
 
 <form method="post" action="{{ url_for('register') }}" class="input">
     3-primary components of homotopy groups of spheres <br>
-    Enter \(n\) and \(k\) .<br>
+    Enter \(n\) and \(k\) . <br>
     <p> \(n\) <input type="number" name="n" value={{n}} required> \( \ \ n = {{n}} \ \ \) 
-        <input type="submit" value="Run"></p>
+        <input type="submit" value="Run">
+        \( \ \ \ \ \ \ \ 0 \longrightarrow \pi^S_{i-6m+3}\otimes Z_3 \longrightarrow Q_{i}^{2m-1} \longrightarrow Tor(\pi^S_{i-6m+2},Z_3) \longrightarrow 0, \ (i < 18m-3) \)
+    </p>
     <p> \(k\) <input type="number" name="k" value={{k}} required> \( \ \ k = {{k}} \ \ \) 
-        <input type="submit" value="Run"></p>
+        <input type="submit" value="Run">
+        \( \ \ \ \ \ \ \ 0 \longrightarrow \pi^S_{ {{n+k-6*((n-1)//2)}} }\otimes Z_3 \longrightarrow Q_{ {{n+k-3}} }^{ {{n-2}} } \longrightarrow Tor(\pi^S_{ {{n+k-3-6*((n-1)//2)+2}} },Z_3) \longrightarrow 0, \ ({{n+k-3}} < {{18*((n-1)//2)-3}}, i={{n+k-3}}, m={{(n-1)//2}}) \)
+    </p>
 </form>
 
 <table border="1" style="border-collapse: collapse">
