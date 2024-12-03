@@ -208,7 +208,9 @@ def register():
         for row in c.execute(gen_query):
           # if row['kinds']==2:
           #   res+='{ s }'
-          if row['kinds']!=-1:
+          if row['kinds']==3:
+            res+=row['latex']
+          elif row['kinds']!=4:
             if el_dim_li[i]< row['n']:res+='{'+row['latex'] +f'_{ {el_dim_li[i]} }'+'(Not Defined)}'
             elif i==0 or el_li[i-1]!=el_li[i]:sq_cnt=1
 #一番最初か、前のidと違うとき、カウントを１にする。
@@ -241,7 +243,7 @@ def register():
           elif el_dim_li[i]== row['n']+1:
             res+='{'+' Eb '+row['latex']+'}'
           else:
-            res+='{'+' Ec '+f"^{ {el_dim_li[i]-row['n']} }"+row['latex']+'}'
+            res+='{'+' E '+f"^{ {el_dim_li[i]-int(row['n'])} }"+row['latex']+'}'
       if 0 in el_li:res='0'
       return res
 
@@ -294,6 +296,11 @@ def register():
               if res[-1]==')':res=res[:-2]+f'^{ {sq_cnt} }'+'})'
               else:res=res[:-1]+f'^{ {sq_cnt} }'+'}'
 #次のidと同じ場合は何もしない
+          
+          elif row['kinds']==3:
+            res+=row['latex']
+          
+          
           elif el_dim_li[i]<row['n']:
             if el_coe_li[i]==1:res+='{'+' E '+f"^{ {el_dim_li[i]-row['n']} }"+row['latex']+'(Not Defined)}'
             elif len_el_li==1:res+=f'{el_coe_li[i]}'+'{'+' E '+f"^{ {el_dim_li[i]-row['n']} }"+row['latex']+'(Not Defined)}'
