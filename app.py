@@ -9,23 +9,30 @@ import sympy as sp
 
 app=Flask(__name__)
 
-n=2
-k=2
-HoGroup=[]
-Arrow=[]
-table_group=[[],[],[],[],[],[]]
-table_gen=[[],[],[],[],[],[]]
-table_arrow=[[],[],[],[],[],[]]
-table_image=[[],[],[],[],[],[]]
-table_ref=[[],[],[],[],[],[]]
-m_d_sum=1
+n=3
+k=3
+HoGroup,HoGroup2,HoGroup3=[],[],[]
+Arrow,Arrow2,Arrow3=[],[],[]
+table_group,table_group2,table_group3=[[],[],[],[],[],[]],[[],[],[],[],[],[]],[[],[],[],[],[],[]]
+table_gen,table_gen2,table_gen3=[[],[],[],[],[],[]],[[],[],[],[],[],[]],[[],[],[],[],[],[]]
+table_arrow,table_arrow2,table_arrow3=[[],[],[],[],[],[]],[[],[],[],[],[],[]],[[],[],[],[],[],[]]
+table_image,table_image2,table_image3=[[],[],[],[],[],[]],[[],[],[],[],[],[]],[[],[],[],[],[],[]]
+table_ref,table_ref2,table_ref3=[[],[],[],[],[],[]],[[],[],[],[],[],[]],[[],[],[],[],[],[]]
+m_d_sum,m_d_sum2,m_d_sum3=1,1,1
 
 @app.route('/')
 def homotopy_group():
   return render_template('homotopy_group.html', title='flask test', n=n, k=k, \
     HoGroup=HoGroup, Arrow=Arrow, \
     table_group=table_group, table_gen=table_gen, table_arrow=table_arrow, \
-    table_image=table_image, table_ref=table_ref, m_d_sum=m_d_sum)
+    table_image=table_image, table_ref=table_ref, m_d_sum=m_d_sum, \
+    HoGroup2=HoGroup2, Arrow2=Arrow2, m_d_sum2=m_d_sum2, \
+    table_group2=table_group2, table_gen2=table_gen2, table_arrow2=table_arrow2, \
+    table_image2=table_image2, table_ref2=table_ref2, \
+    HoGroup3=HoGroup3, Arrow3=Arrow3, m_d_sum3=m_d_sum3, \
+    table_group3=table_group3, table_gen3=table_gen3, table_arrow3=table_arrow3, \
+    table_image3=table_image3, table_ref3=table_ref3
+    )
 
 @app.route('/register', methods=['post'])
 def register():
