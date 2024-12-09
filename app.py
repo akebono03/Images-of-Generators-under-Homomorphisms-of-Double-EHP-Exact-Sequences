@@ -729,7 +729,7 @@ def register():
           elif row['orders']==float('inf'):
             table_group[i].append('Z')
           else:
-            table_group[i].append(f"Z_{int(row['orders'])}")
+            table_group[i].append(f"Z_{ {int(row['orders'])} }")
       else:
         if nn[i]<=kk[i]+2:
           query=f"select * from {'fiber3' if odd and i%3==1 else 'sphere'} where n={nn[i]} and k={kk[i]}"
@@ -742,7 +742,7 @@ def register():
           elif row['orders']==float('inf'):
             table_group[i].append('Z')
           else:
-            table_group[i].append(f"Z_{int(row['orders'])}")
+            table_group[i].append(f"Z_{ {int(row['orders'])} }")
 
     if not odd:
       if nn[1]<=kk[1]+2:
