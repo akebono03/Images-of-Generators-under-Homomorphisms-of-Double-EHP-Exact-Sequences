@@ -3,9 +3,7 @@ app.py
 
 The calculation of homotopy groups of spheres is a fundamental problem in algebraic topology.  
 For an odd prime p, the double EHP sequence is one of the fundamental tools for determining the p-components of the homotopy groups of spheres.
-E^2 denotes the double suspension homomorphism.  
-H represents the generalized Hopf invariant.  
-P corresponds to the Whitehead product.  
+Here, E^2 denotes the double suspension homomorphism, H represents the generalized Hopf invariant, and P corresponds to the Whitehead product.  
 This application, in particular for p=3, provides images of these homomorphisms.
 
 [Toda] H. Toda: Composition methods in homotopy groups of spheres, Ann. Math.  Studies, No. 49, Princeton, 1962.  
