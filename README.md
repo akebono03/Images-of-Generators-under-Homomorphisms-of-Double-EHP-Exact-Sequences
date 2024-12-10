@@ -9,3 +9,4 @@ P is essentially the Whitehead product.
 This application gives images of their homomorphisms.  
 
 [T] H. Toda: Composition methods in homotopy groups of spheres, Ann. Math.  Studies, No. 49, Princeton, 1962.  
+![20241210_doubleEHP](https://github.com/user-attachments/assets/3bda4455-a9bb-440e-a201-4c64ce2a9d10)
