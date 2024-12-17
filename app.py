@@ -243,7 +243,10 @@ def register():
                   res= res[:-1]+f'^{ {sq_cnt} }'+'}'
 #カウントの数をべきにする。
 #次のidと同じ場合は何もしない
+          elif el_dim_li[i] == row['n']-2:
+            res+='{'+' \Delta ' + row['latex'] + '}'
           elif el_dim_li[i] <row['n']:
+            # res+='{'+' Ea '+f"^{ {el_dim_li[i]-row['n']} }"+row['latex']+'(Not Defined)}'
             res+='{'+' Ea '+f"^{ {el_dim_li[i]-row['n']} }"+row['latex']+'(Not Defined)}'
           elif el_dim_li[i] ==row['n']:
             res+='{' +row['latex']+'}'
