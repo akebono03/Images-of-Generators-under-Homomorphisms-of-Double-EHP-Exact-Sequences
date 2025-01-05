@@ -244,16 +244,32 @@ def register():
 #カウントの数をべきにする。
 #次のidと同じ場合は何もしない
           elif el_dim_li[i] == row['n']-2:
-            res+='{'+' \Delta ' + row['latex'] + '}'
+            if '(' == row['latex'][-1]:
+              res+='{'+' \Delta ' + row['latex'] + f"{ {el_dim_li[i]+2} }" + ') }'
+            else:
+              res+='{'+' \Delta ' + row['latex'] + '}'
+          # elif el_dim_li[i] >= row['n']:
+          #   if '(' == row['latex'][-1]:
+          #     res+='{' + row['latex'] + f"{ {el_dim_li[i]} }" + ') }'
+          #   else:
+          #     res+='{' + row['latex'] + '}'
+
           elif el_dim_li[i] <row['n']:
             # res+='{'+' Ea '+f"^{ {el_dim_li[i]-row['n']} }"+row['latex']+'(Not Defined)}'
             res+='{'+' Ea '+f"^{ {el_dim_li[i]-row['n']} }"+row['latex']+'(Not Defined)}'
           elif el_dim_li[i] ==row['n']:
-            res+='{' +row['latex']+'}'
+            if '(' == row['latex'][-1]:
+              res+='{' + row['latex'] + f"{ {el_dim_li[i]} }" + ') }'
+            else:
+              res+='{' +row['latex']+'}'
           elif el_dim_li[i]== row['n']+1:
             res+='{'+' Eb '+row['latex']+'}'
+
           else:
-            res+='{'+' E '+f"^{ {el_dim_li[i]-int(row['n'])} }"+row['latex']+'}'
+            if '(' == row['latex'][-1]:
+              res+='{' + row['latex'] + f"{ {el_dim_li[i]} }" + ') }'
+            else:
+              res+='{'+' E '+f"^{ {el_dim_li[i]-int(row['n'])} }"+row['latex']+'}'
       if 0 in el_li:res='0'
       return res
 
