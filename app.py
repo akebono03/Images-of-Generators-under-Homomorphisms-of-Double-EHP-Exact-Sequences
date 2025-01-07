@@ -794,8 +794,8 @@ def register():
 
   conn.close()
 
-  m_d_sum=3
-  m_d_sum2=3
+  m_d_sum=4
+  m_d_sum2=4
   m_d_sum3=3
 
   return render_template('homotopy_group.html', n=n, k=k, m_d_sum=m_d_sum \
