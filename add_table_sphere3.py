@@ -222,13 +222,13 @@ for i in range(1,k+5,2):
 
 # ファイル名
 input_file = 'sphere3.csv'
-output_file = 'sphere3.csv'
+output_file = 'sphere3_.csv'
 
 # CSVファイルを読み込み
 with open(input_file, 'r', encoding='utf-8') as f:
   reader = list(csv.reader(f))
 
-insert_position = 1053
+insert_position = 1221
 updated_data = reader[:insert_position] + new_rows + reader[insert_position:]
 
 # 新しいCSVファイルとして保存
