@@ -894,7 +894,7 @@ output_file = 'fiber3_.csv'
 with open(input_file, 'r', encoding='utf-8') as f:
   reader = list(csv.reader(f))
 
-insert_position = 2123
+insert_position = 2125
 updated_data = reader[:insert_position] + new_rows + reader[insert_position:]
 
 # 新しいCSVファイルとして保存
