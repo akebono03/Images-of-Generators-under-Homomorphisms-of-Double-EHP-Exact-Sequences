@@ -1,0 +1,86 @@
+\documentclass{article}
+\usepackage[a4paper,margin=2cm,landscape]{geometry} % 横向き設定
+\usepackage{pb-diagram}
+\setlength{\dgARROWLENGTH}{1em}
+
+\begin{document}
+\(
+  \begin{diagram}
+    \node{} 
+      \node[2]{\pi_{2+k}^3}
+      \arrow[2]{e,t}{E^2}
+      \node[2]{\pi_{4+k}^5}
+      \arrow[2]{e,t}{E^2}
+      \node[2]{\pi_{6+k}^7}
+      \arrow{e,t}{E^2}
+      \node{\cdots}
+      \arrow{e,t}{E^2}
+      \node{\pi_{2m-2+k}^{2m-1}}
+      \arrow[2]{e,t}{E^2}
+      \node[2]{\pi_{2m+k}^{2m+1}}
+      \arrow{e,t}{E^2}
+      \node{\cdots}
+      \\
+    \node[2]{Q_k^1}
+    \node[2]{Q_{2+k}^3}
+    \arrow{nw,t}{P} 
+    \node[2]{Q_{4+k}^5}
+    \arrow{nw,t}{P} 
+    \node[2]{\cdots}
+    \node[2]{Q_{2m-2+k}^{2m-1}}
+    \arrow{nw,t}{P}
+    \node{\cdots}
+    \\
+    \node{}
+      \node[2]{\pi_{3+k}^3}
+      \arrow{nw,t}{H}
+      \arrow[2]{e,t}{E^2}
+      \node[2]{\pi_{5+k}^5}
+	\arrow{nw,t}{H}
+      \arrow[2]{e,t}{E^2}
+      \node[2]{\pi_{7+k}^7}
+	\arrow{nw,t}{H}
+      \arrow{e,t}{E^2}
+      \node{\cdots}
+      \arrow{e,t}{E^2}
+      \node{\pi_{2m-1+k}^{2m-1}}
+      \arrow[2]{e,t}{E^2}
+      \node[2]{\pi_{2m+1+k}^{2m+1}}
+      \arrow{nw,t}{H}
+      \arrow{e,t}{E^2}
+      \node{\cdots}
+      \\
+    \node[2]{Q_{1+k}^1}
+    \node[2]{Q_{3+k}^3}
+    \arrow{nw,t}{P} 
+    \node[2]{Q_{5+k}^5}
+    \arrow{nw,t}{P} 
+    \node[2]{\cdots}
+    \node[2]{Q_{2m-1+k}^{2m-1}}
+    \arrow{nw,t}{P}
+    \node{\cdots}
+    \\
+    \node{}
+      \node[2]{\pi_{4+k}^3}
+      \arrow{nw,t}{H}
+      \arrow[2]{e,t}{E^2}
+      \node[2]{\pi_{6+k}^5}
+	\arrow{nw,t}{H}
+      \arrow[2]{e,t}{E^2}
+      \node[2]{\pi_{8+k}^7}
+	\arrow{nw,t}{H}
+      \arrow{e,t}{E^2}
+      \node{\cdots}
+      \arrow{e,t}{E^2}
+      \node{\pi_{2m+k}^{2m-1}}
+      \arrow[2]{e,t}{E^2}
+      \node[2]{\pi_{2m+2+k}^{2m+1}}
+      \arrow{nw,t}{H}
+      \arrow{e,t}{E^2}
+      \node{\cdots}
+  \end{diagram}
+\)
+
+\end{document}
+
+

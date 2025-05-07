@@ -1,0 +1,23 @@
+\documentclass{article}
+\usepackage[a4paper,margin=2cm,landscape]{geometry} % 横向き設定
+\usepackage{pb-diagram}
+\usepackage{amsmath}
+\usepackage{tikz-cd}
+\tikzcdset{every arrow/.append style={very thick}}
+\setlength{\dgARROWLENGTH}{1.4em}
+
+\begin{document}
+\(
+\begin{tikzcd}[nodes={font=\Huge},row sep=0.2cm,column sep=0.1cm]
+n= & & 3 & & 5 & & 7 & & 9 & & 11 & & 13 &  & 15\\
+ & & & AB & & b \\
+k=21 & \text{} & \text{} & \text{} & \bullet & \hookleftarrow & \bullet & = & \bullet \\
+& \text{} & \text{} & \text{} & \text{} & B & \text{}  & \text{}  & \text{} & a \\
+& B^2 & \text{} & \text{} & \text{} & \text{} ab \\
+k=24 & \text{} & \bullet & = & \bullet & \hookleftarrow & \bullet \\
+ & \text{}  & \text{}  & \text{}  & \text{} & AB & \text{} & b 
+\end{tikzcd}
+\)
+\end{document}
+
+
