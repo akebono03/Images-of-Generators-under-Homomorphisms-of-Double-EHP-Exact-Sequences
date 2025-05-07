@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage{pb-diagram}
+\setlength{\dgARROWLENGTH}{1em}
+
+\begin{document}
+\[
+  \begin{diagram}
+    \node[2]{Q^1(\alpha_1)} \\
+    \node{} 
+      \node[2]{\pi_{2q+1}(S^3)}
+      \arrow{nw,t}{H}
+      \arrow[2]{e,t}{E^2}
+      \node[2]{\pi_{2q+3}(S^5)}
+      \arrow[2]{e,t}{E^2}
+      \node[2]{\pi_{2q+5}(S^7)}
+      \arrow[2]{e,t}{E^2}
+      \node[2]{\cdots ,} \\
+    \node[2]{\overline{Q}^1(\alpha_1)}
+    \node[2]{Q^2(\iota)}
+    \arrow{nw,t}{P} \\
+    \node{}
+      \node[2]{\pi_{2q+2}(S^3)}
+      \arrow{nw,t}{H}
+      \arrow[2]{e,t}{E^2}
+      \node[2]{\pi_{2q+4}(S^5)}
+	\arrow{nw,t}{H}
+      \arrow[2]{e,t}{E^2}
+      \node[2]{\pi_{2q+6}(S^7)}
+      \arrow[2]{e,t}{E^2}
+      \node[2]{\cdots ,} \\
+  \end{diagram}
+\]
+
+\end{document}
+
+

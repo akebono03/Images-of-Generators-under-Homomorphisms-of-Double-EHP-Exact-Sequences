@@ -1,0 +1,27 @@
+\documentclass{article}
+\usepackage[a4paper,margin=2cm,landscape]{geometry} % 横向き設定
+\usepackage{pb-diagram}
+\usepackage{amsmath}
+\usepackage{tikz-cd}
+\tikzcdset{every arrow/.append style={thick}}
+\setlength{\dgARROWLENGTH}{1.4em}
+
+\begin{document}
+\(
+\begin{tikzcd}[nodes={font=\Huge},row sep=0.2cm,column sep=0.1cm]
+n= & & 3 & & 5 & & 7 & & 9 & & 11 & & 13 &  & 15\\
+ & & & a & & \\
+k=10 & {} & {} & {} & \bullet \arrow[lu] & = & \bullet & = & {} & {} & {} & {} & {} & {} & {} &  \{\beta_1\} \\
+& b & {} & {} & {} & {} \\
+k=13 & {} & \bullet \arrow[lu] & = & \bullet & = & \bullet & = & {} & {} & {} & {} & {} & {} & {} & {} \{\alpha_1\beta_1\} \\
+& {}  & {}  & ab  & {} & {} \\ 
+k=20 & {} & {} & {} & \bullet \arrow[lu] & = & \bullet & = & \bullet & = & \bullet & = & {} & {} & {} & \{\beta_1^2\} \\
+& b^2  & {}  & {}  & {} & {} \\ 
+k=23 & {} & \bullet \arrow[lu] & = & \bullet & = & \bullet & = & \bullet & = & \bullet & = & \bullet & = & {} & {} \{\alpha_1\beta_1^2\} \\
+& {}  & {} & {} & {} & {} & {} & B & {} & {} \\ 
+k=26 & {} & {} & {} & {} & {} & {} & {} & \bullet \arrow[lu] & = & \bullet & = & \bullet & = & \bullet & = \{\beta_2\} \\
+\end{tikzcd}
+\)
+\end{document}
+
+

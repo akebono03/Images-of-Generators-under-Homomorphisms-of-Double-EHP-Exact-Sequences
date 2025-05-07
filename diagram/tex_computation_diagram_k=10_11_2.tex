@@ -1,0 +1,31 @@
+\documentclass{article}
+\usepackage[a4paper,margin=2cm,landscape]{geometry} % 横向き設定
+\usepackage{pb-diagram}
+\usepackage{amsmath}
+\usepackage{tikz-cd}
+\setlength{\dgARROWLENGTH}{1.4em}
+
+\begin{document}
+\(
+  \begin{diagram}
+	\node{n=}\node[2]{3}\node[2]{5}\node[2]{7} \\
+	\node[2]{a_2}\node[2]{a_1} 
+	\\
+	\node{k=10}
+	\node[2]{\shortstack[t]{x \\ x \\ x}}\arrow[2]{e,t}{}\arrow{nw,t}{}
+	\node[2]{\shortstack[t]{x \\ \text{　} \text{　}}}\arrow[2]{e,t}{}\arrow{nw,t}{}
+	\node[2]{\bullet}
+	\node{=\{\beta_1\}}
+	\\
+	\node[2]{A_2}\node[2]{A_1}\node[2]{i}\arrow{nw,t}{} 
+	\\
+	\node{k=11}
+	\node[2]{\bullet}\arrow[2]{e,t}{}\arrow{nw,t}{}
+	\node[2]{\circ}\arrow[2]{e,t}{=}\arrow{nw,t}{}
+	\node[2]{\circ}
+	\node{=\{\alpha'_3\}}
+  \end{diagram}
+\)
+\end{document}
+
+

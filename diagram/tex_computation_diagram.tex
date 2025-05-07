@@ -1,0 +1,45 @@
+\documentclass{article}
+\usepackage[a4paper,margin=2cm,landscape]{geometry} % 横向き設定
+\usepackage{pb-diagram}
+\setlength{\dgARROWLENGTH}{1em}
+
+\begin{document}
+\(
+  \begin{diagram}
+    \node[2]{\pi_{-1+k}(Q_2^1)}
+    \node[2]{\pi_{1+k}(Q_2^3)}
+    \node[2]{\pi_{3+k}(Q_2^5)} \\
+    \node{} 
+      \node[2]{\pi_{2+k}(S^3)}
+      \arrow{nw,t}{H}
+      \arrow[2]{e,t}{E^2}
+      \node[2]{\pi_{4+k}(S^5)}
+      \arrow{nw,t}{H}
+      \arrow[2]{e,t}{E^2}
+      \node[2]{\pi_{6+k}(S^7)}
+      \arrow{nw,t}{H}
+      \arrow{e,t}{E^2}
+      \node{\cdots ,} \\
+    \node[2]{\pi_{k}(Q_2^1)}
+    \node[2]{\pi_{2+k}(Q_2^3)}
+    \arrow{nw,t}{P} 
+    \node[2]{\pi_{4+k}(Q_2^5)}
+    \arrow{nw,t}{P} 
+    \\
+    \node{}
+      \node[2]{\pi_{3+k}(S^3)}
+      \arrow{nw,t}{H}
+      \arrow[2]{e,t}{E^2}
+      \node[2]{\pi_{5+k}(S^5)}
+	\arrow{nw,t}{H}
+      \arrow[2]{e,t}{E^2}
+      \node[2]{\pi_{7+k}(S^7)}
+	\arrow{nw,t}{H}
+      \arrow{e,t}{E^2}
+      \node{\cdots ,}
+  \end{diagram}
+\)
+
+\end{document}
+
+

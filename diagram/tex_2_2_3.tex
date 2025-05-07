@@ -1,0 +1,18 @@
+\documentclass{article}
+\usepackage{pb-diagram}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\setlength{\dgARROWLENGTH}{1em}
+
+
+\begin{document}
+\[
+  \begin{diagram}
+    \node{\pi_{2p-1}(S^{2p-1})} \arrow{e,t}{\tilde{g}_*} \arrow{s,l}{=} \node{\pi_{2p-1}(\widetilde{S^2_{p-1}})} \arrow{e,t}{\widetilde{f_{p-1}}_*} \arrow{s,l}{\rho_{p-1*}} \node{\pi_{2p-1}(S^{2p-1})} \arrow{s,r}{\cong} \\
+    \node{\pi_{2p-1}(S^{2p-1})} \arrow{e,t}{g_*} \node{\pi_{2p-1}(S^2_{p-1})} \arrow{e,t}{f_{p-1*}} \node{\pi_{2p-1}(\mathbb{C}P^{p-1})} \\
+    \node{\pi_{2p}(Y^{2p},S^{2p-1})}\arrow{n,l}{\partial}\arrow{n,r}{\times p}\arrow{e,t}{\overline{g}_*}\arrow{e,b}{\times x}
+    \node{\pi_{2p}(S^2_p,S^2_{p-1})}\arrow{n,l}{\partial}\arrow{e,t}{f_p*}\arrow{e,b}{\times p!}
+    \node{\pi_{2p}(\mathbb{C}P^p,\mathbb{C}P^{p-1})}\arrow{n,l}{\partial}\arrow{n,r}{\cong}
+  \end{diagram}
+\]
+\end{document}

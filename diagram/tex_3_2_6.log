@@ -1,0 +1,172 @@
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.5.2)  7 MAY 2025 13:46
+ restricted system commands enabled.
+**tex_3_2_6.tex
+(./tex_3_2_6.tex
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-04-14>
+Lua module: luaotfload 2024-12-03 v3.29 Lua based OpenType font support
+Lua module: lualibs 2023-07-13 v2.76 ConTeXt Lua standard libraries.
+Lua module: lualibs-extended 2023-07-13 v2.76 ConTeXt Lua libraries -- extended 
+collection.
+luaotfload | conf : Root cache directory is "C:/Users/oomae/.texlive2025/texmf-v
+ar/luatex-cache/generic/names".
+luaotfload | init : Loading fontloader "fontloader-2023-12-28.lua" from kpse-res
+olved path "c:/texlive/2025/texmf-dist/tex/luatex/luaotfload/fontloader-2023-12-
+28.lua".
+Lua-only attribute luaotfload@noligature = 1
+luaotfload | init : Context OpenType loader version 3.134
+Inserting `luaotfload.node_processor' in `pre_linebreak_filter'.
+Inserting `luaotfload.node_processor' in `hpack_filter'.
+Inserting `luaotfload.glyph_stream' in `glyph_stream_provider'.
+Inserting `luaotfload.define_font' in `define_font'.
+Lua-only attribute luaotfload_color_attribute = 2
+luaotfload | conf : Root cache directory is "C:/Users/oomae/.texlive2025/texmf-v
+ar/luatex-cache/generic/names".
+Inserting `luaotfload.harf.strip_prefix' in `find_opentype_file'.
+Inserting `luaotfload.harf.strip_prefix' in `find_truetype_file'.
+Removing  `luaotfload.glyph_stream' from `glyph_stream_provider'.
+Inserting `luaotfload.harf.glyphstream' in `glyph_stream_provider'.
+Inserting `luaotfload.harf.finalize_vlist' in `post_linebreak_filter'.
+Inserting `luaotfload.harf.finalize_hlist' in `hpack_filter'.
+Inserting `luaotfload.cleanup_files' in `wrapup_run'.
+Inserting `luaotfload.harf.finalize_unicode' in `finish_pdffile'.
+Inserting `luaotfload.glyphinfo' in `glyph_info'.
+Lua-only attribute luaotfload.letterspace_done = 3
+Inserting `luaotfload.aux.set_sscale_dimens' in `luaotfload.patch_font'.
+Inserting `luaotfload.aux.set_font_index' in `luaotfload.patch_font'.
+Inserting `luaotfload.aux.patch_cambria_domh' in `luaotfload.patch_font'.
+Inserting `luaotfload.aux.fixup_fontdata' in `luaotfload.patch_font_unsafe'.
+Inserting `luaotfload.aux.set_capheight' in `luaotfload.patch_font'.
+Inserting `luaotfload.aux.set_xheight' in `luaotfload.patch_font'.
+Inserting `luaotfload.rewrite_fontname' in `luaotfload.patch_font'.
+Inserting `tracingstacklevels' in `input_level_string'. (c:/texlive/2025/texmf-
+dist/tex/latex/base/article.cls
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+(c:/texlive/2025/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2024/06/29 v1.4n Standard LaTeX file (size option)
+luaotfload | db : Font names database loaded from C:/Users/oomae/.texlive2025/te
+xmf-var/luatex-cache/generic/names/luaotfload-names.luc.gz)
+\c@part=\count270
+\c@section=\count271
+\c@subsection=\count272
+\c@subsubsection=\count273
+\c@paragraph=\count274
+\c@subparagraph=\count275
+\c@figure=\count276
+\c@table=\count277
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen145
+)
+(c:/texlive/2025/texmf-dist/tex/latex/pb-diagram/pb-diagram.sty
+\dgARROWLENGTH=\skip51
+\dgTEXTARROWLENGTH=\skip52
+\dgHORIZPAD=\skip53
+\dgVERTPAD=\skip54
+\dgLABELOFFSET=\skip55
+\dgARROWPARTS=\count278
+\dgDOTSPACING=\skip56
+\dgDOTSIZE=\skip57
+\dgMAXSQUARE=\count279
+\dgMINDBLSQ=\count280
+\dgCOLUMNWIDTH=\skip58
+\dg@HORIZ=\count281
+\dg@VERT=\count282
+\dg@XLPAD=\count283
+\dg@YBPAD=\count284
+\dg@XRPAD=\count285
+\dg@YTPAD=\count286
+\dg@X=\count287
+\dg@Y=\count288
+\dg@XGRID=\count289
+\dg@YGRID=\count290
+\dg@SIZE=\count291
+\dg@USERSIZE=\count292
+\dg@DX=\count293
+\dg@DY=\count294
+\dg@XLBL=\count295
+\dg@YLBL=\count296
+\dg@XOFFSET=\count297
+\dg@YOFFSET=\count298
+\dg@LBLOFF=\count299
+\dg@XLBLOFF=\count300
+\dg@YLBLOFF=\count301
+\dg@LBLPOS=\count302
+\dg@XTEMP=\count303
+\dg@YTEMP=\count304
+\dg@ZTEMP=\count305
+\dg@XNODE=\count306
+\dg@YNODE=\count307
+\dg@XEND=\count308
+\dg@YEND=\count309
+\dg@WEND=\count310
+\dg@HEND=\count311
+\dg@COUNT=\count312
+\dg@NODEBOX=\box53
+\dg@LABONEBOX=\box54
+\dg@LABTWOBOX=\box55
+)
+(c:/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-luatex.def
+File: l3backend-luatex.def 2025-04-14 L3 backend support: PDF output (LuaTeX)
+\l__color_backend_stack_int=\count313
+Inserting `l3color' in `luaotfload.parse_color'.)
+(./tex_3_2_6.aux)
+\openout1 = tex_3_2_6.aux
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 6.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 6.
+ [diagram 1 . . . ]
+
+[1
+
+{c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+(./tex_3_2_6.aux)
+ ***********
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-04-14>
+ ***********
+)
+
+Here is how much of LuaTeX's memory you used:
+ 608 strings out of 471925
+ 100000,662416 words of node,token memory allocated
+ 506 words of node memory still in use:
+   3 hlist, 1 vlist, 1 rule, 2 glue, 3 kern, 8 sub_mlist, 1 glyph, 13 attribute,
+ 56 glue_spec, 13 attribute_list, 1 write nodes
+   avail lists: 2:696,3:88,4:1,5:184,6:72,7:992,8:13,9:1008
+ 27280 multiletter control sequences out of 65536+600000
+ 25 fonts using 1345055 bytes
+ 35i,25n,37p,203b,519s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf><c:/t
+exlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/202
+5/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2025/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2025/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><c
+:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb>
+Output written on tex_3_2_6.pdf (1 page, 58843 bytes).
+
+PDF statistics: 47 PDF objects out of 1000 (max. 8388607)
+ 32 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 131072)
+ 1 words of extra memory for PDF output out of 10000 (max. 100000000)
+
