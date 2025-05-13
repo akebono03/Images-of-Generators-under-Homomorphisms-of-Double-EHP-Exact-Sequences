@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage[a4paper,margin=2cm,landscape]{geometry} % 横向き設定
+\usepackage{pb-diagram}
+\usepackage{amsmath}
+\usepackage{tikz-cd}
+\tikzcdset{
+%every arrow/.append style={thick},
+arrow style = tikz,            % TikZ 標準の矢印を使う
+%diagrams = {>={Stealth[round]}} % 矢尻を Stealth（丸み付き）に
+diagrams = {>={Latex[round]}}
+}
+\setlength{\dgARROWLENGTH}{1.0em}
+%\usepackage[left=0cm]{geometry}
+\pagestyle{empty}
+
+\begin{document}
+\(
+\begin{tikzcd}[
+nodes={font=\large,inner sep=0.2pt},
+row sep=0.4cm,
+column sep=0.2cm
+%column sep=0.01em
+]
+n=& && 3 & & 5 & & 7 & & 9 & & 11 & & 13 & & 15 & & 17 & & 19 & & 21 & & 23 && 25 && 27 \\
+&& b^3b_2 && && \\
+k=59& && \bullet\arrow[lu] &=& \bullet &=& \bullet \\
+&& U && u_2 && u_1 && ph\arrow[lu] && && && && && && && && \\
+k=60& && \bullet\arrow[lu] && \bullet\arrow[lu] &\hookleftarrow& \bullet\arrow[lu] &&  \\
+&& && U_2\arrow[lu] && U_1\arrow[lu] && w\arrow[lu] && && && && AB_2 && b_2 && && && && \\ 
+k=61& && && && && && && && && \bullet\arrow[lu] & \hookleftarrow & \bullet\arrow[lu] &=& \bullet &=& \bullet &=& \bullet \\
+&& && ab_2^2 && && B^2B_2 && && abb_2 && && && B_2\arrow[lu] && ab^2 && && && B\arrow[lu] \\
+\end{tikzcd}
+\)
+\end{document}
+
+

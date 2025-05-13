@@ -1,0 +1,39 @@
+\documentclass{article}
+\usepackage[a4paper,margin=2cm,landscape]{geometry} % 横向き設定
+\usepackage{pb-diagram}
+\usepackage{amsmath}
+\usepackage{tikz-cd}
+\tikzcdset{every arrow/.append style={very thick}}
+\setlength{\dgARROWLENGTH}{1.4em}
+%\usepackage[left=0cm]{geometry}
+\pagestyle{empty}
+
+\begin{document}
+\(
+\begin{tikzcd}[
+nodes={font=\Large,inner sep=0pt},
+row sep=0.2cm,
+column sep=0.1cm
+%column sep=0.01em
+]
+n=& && 3 & & 5 & & 7 & & 9 & & 11 & & 13 & & 15 & & 17 & & 19 & & 21 & & 23 && 25 && 27 \\
+ && && AB^2B_2 && b^2b_2 && && && && && && && && AB && b \\
+k=57& && && \bullet & \hookleftarrow & \bullet &=& \bullet && && && && && && && \bullet & \hookleftarrow & \bullet &=& \bullet \\
+& & && && B^2B_2 && && abb_2 && && && && && && && B && && a \\
+&& && B^5 && be' && && && && B^3 && && ab^2 \\
+k=58& && && \bullet & \hookleftarrow & \bullet &=& \bullet && && && \bullet &=& \bullet &\hookleftarrow& \bullet \\
+& & && && BE' && && b^4 && && && && AB^2 && b^2 \\ 
+&& && && && && ABB_2 && && bb_2 \\
+k=59& && && && && && \bullet & \hookleftarrow & \bullet &=& \bullet \\
+& & && && && && && && BB_2 && ab_2 \\
+&& B^3B_2 && && abb_2 && && B^4 && e' && && && && B^2 && && ab \\
+k=60& && \bullet &=& \bullet &\hookleftarrow& \bullet && && \bullet & \hookleftarrow & \bullet & = & \bullet && && && \bullet &=& \bullet &\hookleftarrow& \bullet  \\
+&& && && AB^2B_2 && b^2b_2 && && E' && && b^3 && && && && AB && b \\ 
+&& B^2E' && && b^5 && && e_2 && e_1 && && && && \\
+k=61& && \bullet &=& \bullet &\hookleftarrow& \bullet && && \bullet & \hookleftarrow & \bullet & = & \bullet \\
+&& && && B^5 && be' && && E_1 && && B^3 && && \\
+\end{tikzcd}
+\)
+\end{document}
+
+

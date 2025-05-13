@@ -1,0 +1,48 @@
+\documentclass{article}
+% \usepackage[a4paper,margin=2cm,landscape]{geometry} % 横向き設定
+\usepackage{pb-diagram}
+\usepackage{amsmath}
+\usepackage{tikz-cd}
+\usetikzlibrary{arrows.meta}
+\tikzcdset{
+every arrow/.append style={thick},
+arrow style = tikz,            % TikZ 標準の矢印を使う
+%diagrams = {>={Stealth[round]}} % 矢尻を Stealth（丸み付き）に
+diagrams = {>={Latex[round]}}
+}
+\setlength{\dgARROWLENGTH}{1.4em}
+\usepackage[left=1cm]{geometry}
+
+
+\begin{document}
+\(
+\begin{tikzcd}[
+nodes={font=\Large},
+row sep=0.3cm,
+column sep=0.1cm,
+column 16/.append style={nodes={align=left,anchor=west}}
+]
+n= & & 3 & & 5 & & 7 & & 9 & & 11 & & 13 & & 15 & {} \\
+& {}  & {}  & ab  & {} & {} \\ 
+k=20 & & & & \bullet \arrow[lu] & = & \bullet & = & \bullet & = & \bullet & = & & & & \{\beta_1^2\} \\
+& & & AB & & b \\
+k=21 & & & & \bullet \arrow[lu] & & \bullet \arrow[lu] & = & \bullet & & & & & & & \Delta(v(5))=P(B)  \\
+& & & & & B \arrow[lu] & & & & a \arrow[lu] \\
+k=22 & & & & & & & & & & (\bullet) & & & & & w=I(P(i))\ne0  \\
+& b^2  & & & & & & & & & & (i) \arrow[lu] \\ 
+k=23 & & \bullet \arrow[lu] & = & \bullet & = & \bullet & = & \bullet & = & \bullet & = & \bullet & = & & \{\alpha_1\beta_1^2\} \\
+& B^2 & & & & ab \\
+k=24 & & \bullet \arrow[lu] & = & \bullet & & \bullet \arrow[lu] & & & & & & & & & \Delta(P(b))=P(AB) \\
+& & & & & AB \arrow[lu] & & b \arrow[lu] \\
+k=25 \\
+& ab^2 & & & & & & B & & \\ 
+k=26 & & \bullet \arrow[lu] & & & & & & \bullet \arrow[lu] & = & \bullet & = & \bullet & = & \bullet & = \{\beta_2\} \\
+& AB^2 & & b^2 \arrow[lu] \\
+k=27 & & \bullet \arrow[lu] \\
+& & & B^2 \arrow[lu] \\
+n= & & 3 & & 5 & & 7 & & 9 & & 11 & & 13 & & 15 & {} \\
+\end{tikzcd}
+\)
+\end{document}
+
+

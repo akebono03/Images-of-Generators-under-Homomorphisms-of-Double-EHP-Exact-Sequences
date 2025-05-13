@@ -1,0 +1,55 @@
+\documentclass{article}
+%\usepackage[a4paper,margin=2cm,landscape]{geometry} % 横向き設定
+\usepackage{pb-diagram}
+\usepackage{amsmath}
+\usepackage{tikz-cd}
+\usetikzlibrary{arrows.meta}
+\tikzcdset{
+every arrow/.append style={thick},
+arrow style = tikz,            % TikZ 標準の矢印を使う
+%diagrams = {>={Stealth[round]}} % 矢尻を Stealth（丸み付き）に
+diagrams = {>={Latex[round]}}
+}
+\setlength{\dgARROWLENGTH}{1.4em}
+\usepackage[left=0cm]{geometry}
+\pagestyle{empty}
+
+\begin{document}
+\(
+\begin{tikzcd}[
+nodes={font=\large,inner sep=0pt},
+row sep=0.2cm,
+column sep=0.1cm
+%column sep=0.01em
+]
+n= && & 3 & & 5 & & 7 & & 9 & & 11 & & 13 & & 15 & & 17 && 19 && 21 && 23 && 25 && 27\\
+&& && && && B^2B_2 && && abb_2 \\
+k=62 &&& && && && \bullet &=& \bullet &\hookleftarrow& \bullet \\
+&& && && && && && ABB_2 && bb_2 \\
+&& && AB_2^2 && b_2^2 && BE' && && b^4 \\
+k=63 &&& && && && \bullet &=& \bullet &\hookleftarrow& \bullet \\
+&&& && \bullet &\hookleftarrow& \bullet &=& \bullet \\
+&& && && B_2^2 && && ph && B^4 && e' \\
+&& && && && && && && BB_2 && && ab_2 \\
+k=64 &&& && && && && && && \bullet &=& \bullet &\hookleftarrow& \bullet \\
+&& && &&  && && && && && && AB_2 && b_2 \\
+&& && && && && AE_2 && e_2 && E' && && b^3 \\
+k=65 &&& && && && && \bullet &\hookleftarrow& \bullet && \bullet &=& \bullet &\hookleftarrow& \bullet \\
+&& BB_2^2 && && ab_2^2 && && && E_2 && E_1 && && B^3 && B_2 \\
+k=66 &&& \bullet &=& \bullet &\hookleftarrow& \bullet \\
+&& && && AB_2^2 && b_2^2 && && && && && && && AB^2 && b^2 \\
+k=67 &&& && && && && && && && && && && \bullet &\hookleftarrow& \bullet &=& \bullet \\
+&& && && && && && && && && && && && B^2 && && ab \\
+k=68 &&& && && &&  \\
+&& && && && && AB^2B_2 && b^2b_2 \\
+k=69 &&& && && && && \bullet &\hookleftarrow& \bullet &=& \bullet \\
+&& && && && && && B^2B_2 && && abb_2 \\
+&& && && && && B^5 && be' && && && && B^3 && && ab^2 \\
+k=70 &&& && && && &&\bullet &\hookleftarrow& \bullet &=& \bullet && && && \bullet &=& \bullet &\hookleftarrow& \bullet \\
+&& && && && && && BE' && && b^4 && && && && AB^2 && b^2 \\
+\\
+\end{tikzcd}
+\)
+\end{document}
+
+

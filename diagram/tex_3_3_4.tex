@@ -1,0 +1,22 @@
+\documentclass{article}
+\usepackage{pb-diagram}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\setlength{\dgARROWLENGTH}{1em}
+
+
+\begin{document}
+\[
+  \begin{diagram}
+    \node{\pi_{i}(S^{2m+1})} \arrow{e,t}{E^{4}} \arrow{s,r}{\times p} 
+    \node{\pi_{i+4}(S^{2pm+1})} \arrow{e,t}{H^{(4)}} \arrow{s,r}{\Delta} 
+    \node{\pi_{i-1}(Q_4^{2pm-3})} \arrow{e,t}{P^{(4)}}\arrow{s,r}{\overline{\Delta}}
+    \node{\pi_{i-1}(S^{2pm-3})} \arrow{s,r}{\times p}
+    \\
+    \node{\pi_{i}(S^{2pm-3})} \arrow{e,t}{E^2}
+    \node{\pi_{i+2}(S^{2pm-1})} \arrow{e,t}{H}
+    \node{\pi_{i-1}(Q_2^{2pm-3})} \arrow{e,t}{P}
+    \node{\pi_{i-1}(S^{2pm-3})}
+  \end{diagram}
+\]
+\end{document}

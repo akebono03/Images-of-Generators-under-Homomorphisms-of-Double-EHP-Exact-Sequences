@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage[a4paper,margin=2cm,landscape]{geometry} % 横向き設定
+\usepackage{pb-diagram}
+\usepackage{amsmath}
+\usepackage{tikz-cd}
+\usetikzlibrary{arrows.meta}
+\tikzcdset{
+every arrow/.append style={thick},
+arrow style = tikz,            % TikZ 標準の矢印を使う
+%diagrams = {>={Stealth[round]}} % 矢尻を Stealth（丸み付き）に
+diagrams = {>={Latex[round]}}
+}
+\setlength{\dgARROWLENGTH}{1.4em}
+%\usepackage[left=0cm]{geometry}
+
+\begin{document}
+\(
+\begin{tikzcd}[
+nodes={font=\large},
+row sep=0.3cm,
+column sep=0.1cm]
+n= && 3 && 5 && 7 && 9 && 11 && 13 && 15 && 17 && 19 && 21 && 23 && 25 && 27 \\
+ & && ab_2^2 && &&  \\
+k=62 && && \bullet\arrow[lu] &=& \bullet &=& \bullet & = & \bullet & = & \bullet & = & \bullet & = & \bullet & = & \bullet  &=& \bullet &=& \bullet &=& \bullet &=& \bullet &=& \cdots & \{\beta_1\beta_2^2\} \\
+& bb_2^2 && && && && && && e_1 \\
+k=65 && \bullet \arrow[lu] &=& \bullet  &=& \bullet &=& \bullet &=& \bullet &=& \bullet &=& \bullet &=& \bullet &=& \bullet &=& \bullet &=& \bullet &=& \bullet &=& \bullet &=& \cdots & \{\alpha_1\beta_1\beta_2^2\} \\
+&& && && && && && && \bullet\arrow[luu] &=& \bullet &=& \bullet &=& \bullet \\
+& && && && && && && && && && && ab^2\arrow[lu] \\
+\\
+\end{tikzcd}
+\) \\
+\(
+\begin{tikzcd}[
+nodes={font=\large},
+row sep=0.3cm,
+column sep=0.1cm]
+n= && 3 && 5 && 7 && 9 && 11 && 13 && 15 && 17 && 19 && 21 && 23 && 25 && 27 && 29 && 31 && 33\\
+& && && && B_2^2 && ab^2b_2 && ph \\
+k=68 && && && && \bullet \arrow[lu] &=& \bullet &=& \bullet &=& \bullet &=& \bullet &=& \bullet &=& \bullet &=& \bullet &=& \bullet &=& \bullet &=& \bullet &=& \cdots &&& \{\lambda\} \\
+&& && && && && \bullet \arrow[luu] & \rightarrow & \circ\arrow[luu] & \rightarrow & \bullet \\
+& && && && && b^5 && AE_2 && e_2\arrow[lu] && e_1\arrow[lu] && && b^3 && && && && AB && b \\
+k=69 && && && && && \bullet \arrow[lu] & \rightarrow & \circ\arrow[lu] & \rightarrow & \bullet && && && \bullet\arrow[lu] &=& \bullet &=& \bullet &=& \bullet &=& \bullet & \rightarrow & \circ\arrow[lu] & \rightarrow & \bullet \\
+&& && && && && && && && && && && && && && \bullet\arrow[luu] && && && &&  \\
+& && && && && && && E_2\arrow[luu] && E_1\arrow[luu] && && && && && && && B\arrow[lu] && a_2\arrow[luu] && a\arrow[luu] 
+\\
+\end{tikzcd}
+\)
+\end{document}
+
+
