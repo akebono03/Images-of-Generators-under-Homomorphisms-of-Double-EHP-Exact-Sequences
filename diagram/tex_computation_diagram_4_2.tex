@@ -1,0 +1,21 @@
+\documentclass{article}
+\usepackage[a4paper,margin=2cm,landscape]{geometry} % 横向き設定
+\usepackage{pb-diagram}
+\usepackage{amsmath}
+\usepackage{tikz-cd}
+\tikzcdset{every arrow/.append style={thick}}
+\setlength{\dgARROWLENGTH}{1.4em}
+
+\begin{document}
+\(
+\begin{tikzcd}[nodes={font=\Large},row sep=0.3cm,column sep=0.1cm]
+n= & & 3 & & 5 & & 7 & & \cdots & & 2r-5 & & 2r-3 &  & 2r-1 & stable \\
+ & a_{r-1} & & a_{r-2} & & a_{r-3} & & & & a_3& & a_2 & & a_1 \\
+k=rq-2 & & \alpha_r^*(3) \arrow[lu,"H"'] & & \alpha_r^*(5) \arrow[lu,"H"'] & & \alpha_r^*(7) \arrow[lu,"H"'] & & \cdots & & \alpha_r^*(2r-5) \arrow[lu,"H"'] & & \alpha_r^*(2r-3) \arrow[lu,"H"'] & & \alpha_r^*(2r-1) \arrow[lu,"H"'] & & \\
+& A_{r-1} & & A_{r-2} \arrow[lu,"P"'] & & A_{r-3} \arrow[lu,"P"'] & & & & & & A_{2} \arrow[lu,"P"'] & & A_{1} \arrow[lu,"P"'] & & A_{0} \arrow[lu,"P"']\\
+k=rq-1 & & \alpha_r(3) \arrow[lu,"H"'] & = & \alpha_r(5) & = & \alpha_r(7) & = & \cdots & = & \alpha_r(2r-5) & = & \alpha_r(2r-3) & = & \alpha_r(2r-1) & \stackrel{E^\infty}{\rightarrow} \alpha_r 
+\end{tikzcd}
+\)
+\end{document}
+
+

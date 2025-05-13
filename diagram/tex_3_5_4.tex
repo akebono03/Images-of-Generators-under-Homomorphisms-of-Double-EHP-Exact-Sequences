@@ -1,0 +1,32 @@
+\documentclass{article}
+\usepackage{pb-diagram}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\setlength{\dgARROWLENGTH}{1em}
+
+
+\begin{document}
+\[
+  \begin{diagram}
+    \node{\pi_{i+2}(B_{m}(\alpha))} \arrow{e,t}{p_*} \arrow{s,r}{E^2} 
+    \node{\pi_{i+2}(S^{2m+2p-1})} \arrow{e,t}{\partial_{\alpha}} \arrow{s,r}{E^2} 
+    \node{\pi_{i+1}(S^{2m+1})} \arrow{e,t}{i_*}\arrow{s,r}{E^2}
+    \node{\pi_{i+1}(B_{m}(\alpha))} \arrow{s,r}{E^2}
+    \\
+    \node{\pi_{i+4}(B_{m+1}(\alpha))} \arrow{e,t}{p_*} \arrow{s,r}{H}
+    \node{\pi_{i+4}(S^{2m+2p+1})} \arrow{e,t}{\partial_{\alpha}} \arrow{s,r}{H}
+    \node{\pi_{i+3}(S^{2m+3})} \arrow{e,t}{i_*} \arrow{s,r}{H}
+    \node{\pi_{i+3}(B_{m+1}(\alpha))} \arrow{s,r}{H}
+    \\
+    \node{\pi_{i+1}(QB_{m}(\alpha))} \arrow{e,t}{p_*} \arrow{s,r}{P}
+    \node{\pi_{i+1}(Q_2^{2m+2p-1})} \arrow{e,t}{\partial_{\alpha}} \arrow{s,r}{P}
+    \node{\pi_{i}(Q_2^{2m+1})} \arrow{e,t}{i_*} \arrow{s,r}{P}
+    \node{\pi_{i}(QB_{m}(\alpha))} \arrow{s,r}{P}
+    \\
+    \node{\pi_{i+1}(B_{m}(\alpha))} \arrow{e,t}{p_*}
+    \node{\pi_{i+1}(S^{2m+2p-1})} \arrow{e,t}{\partial_{\alpha}}
+    \node{\pi_{i}(S^{2m+1})} \arrow{e,t}{i_*}
+    \node{\pi_{i}(B_{m}(\alpha))}
+  \end{diagram}
+\]
+\end{document}

@@ -1,0 +1,50 @@
+\documentclass{article}
+%\usepackage[a4paper,margin=2cm,landscape]{geometry} % 横向き設定
+\usepackage{pb-diagram}
+\usepackage{amsmath}
+\usepackage{tikz-cd}
+\tikzcdset{every arrow/.append style={very thick}}
+\setlength{\dgARROWLENGTH}{1.0em}
+\usepackage[left=0cm]{geometry}
+\pagestyle{empty}
+
+\begin{document}
+\(
+\begin{tikzcd}[
+%nodes={font=\large},
+row sep=0.1cm,
+column sep=0.1cm]
+n= & & 3 & & 5 & & 7 & & 9 & & 11 & & 13 & & 15 & & 17 & & 19 & & 21 & & 23 \\
+ & & & & & & & B^3 & & & & ab^2 \\
+k=46 & & & & & & & & \bullet & = & \bullet & \hookleftarrow & \bullet \\
+ & & & & & & & & & & & AB^2 & & b^2 \\
+& & & ABB_2 & & bb_2 & & \\
+k=47 & & & & \bullet & \hookleftarrow & \bullet & = & \bullet \\
+ & & & & & BB_2 & & & & ab_2 \\ 
+& & & B^4 & & e' && && && && B^2 && && ab  \\
+k=48 & & & & \bullet & \hookleftarrow & \bullet & = & \bullet && && && \bullet & = & \bullet & \hookleftarrow & \bullet \\
+ & & & & & E' && && b^3 && && && && AB && b \\
+& && e_2 && e_1 && && && && \\
+k=49 && && \bullet & \hookleftarrow & \bullet & = & \bullet \\
+ & && && E_1 && && B^3 && && &&  \\ 
+& B^2B_2 && && abb_2 && && && && && && && \\
+k=50 && \bullet & = & \bullet & \hookleftarrow & \bullet && && && && && && && \\
+& && && ABB_2 && bb_2 && && && && && && && \\
+& BE' && && b^4 && && && && && && && \\
+k=51 && \bullet & = & \bullet & \hookleftarrow & \bullet && && && && && && && \\
+& && && B^4 && e' && && && && && && && \\
+& && && && BB_2 && && ab_2 && && && && \\
+k=52 && && && && \bullet & = & \bullet & \hookleftarrow & \bullet && && && && && && && \\
+& && && && && && AB_2 && b_2 && && && \\
+& && AE_2 && e_2 && E' && && b^3 && && && && \\
+k=53 && && \bullet & \hookleftarrow & \bullet && \bullet & = & \bullet & \hookleftarrow & \bullet && && && && \\
+& && && E^2 && E_1 && && B^3 && B_2 && && && && \\
+& && && && && && && && AB^2 && b^2 &&  \\
+k=55 && && && && && && && && \bullet & \hookleftarrow & \bullet & = & \bullet && && && && && && && \\
+& && && && && && && && && B^2 && && ab \\
+n= & & 3 & & 5 & & 7 & & 9 & & 11 & & 13 & & 15 & & 17 & & 19 & & 21 & & 23
+\end{tikzcd}
+\)
+\end{document}
+
+
