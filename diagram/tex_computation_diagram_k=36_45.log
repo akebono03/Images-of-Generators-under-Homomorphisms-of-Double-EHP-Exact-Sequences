@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.5.2)  8 MAY 2025 20:24
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.5.2)  14 MAY 2025 17:23
  restricted system commands enabled.
 **tex_computation_diagram_k=36_45.tex
 (./tex_computation_diagram_k=36_45.tex
@@ -593,11 +593,6 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Overfull \hbox (34.08316pt too wide) in paragraph at lines 10--31
-[]$[]$ 
- []
-
-
 
 [1
 
@@ -610,21 +605,21 @@ L3 programming layer <2025-04-14>
 )
 
 Here is how much of LuaTeX's memory you used:
- 15040 strings out of 471925
+ 15039 strings out of 471925
  100000,794899 words of node,token memory allocated
  530 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 59 glue_spec,
  8 attribute_list, 2 write nodes
    avail lists: 2:5356,3:2249,4:10,5:54,6:2,7:5130,8:5,9:2644
- 41243 multiletter control sequences out of 65536+600000
+ 41242 multiletter control sequences out of 65536+600000
  40 fonts using 2346335 bytes
- 116i,16n,114p,524b,985s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 116i,16n,114p,524b,993s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf><c:/t
 exlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/202
 5/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2025/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2025/texmf-dist/fonts/typ
 e1/public/amsfonts/cm/cmsy10.pfb>
-Output written on tex_computation_diagram_k=36_45.pdf (1 page, 37785 bytes).
+Output written on tex_computation_diagram_k=36_45.pdf (1 page, 37734 bytes).
 
 PDF statistics: 34 PDF objects out of 1000 (max. 8388607)
  23 compressed objects within 1 object stream

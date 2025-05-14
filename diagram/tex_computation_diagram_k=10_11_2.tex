@@ -1,31 +1,33 @@
 \documentclass{article}
-\usepackage[a4paper,margin=2cm,landscape]{geometry} % 横向き設定
+%\usepackage[a4paper,margin=2cm,landscape]{geometry} % 横向き設定
 \usepackage{pb-diagram}
 \usepackage{amsmath}
 \usepackage{tikz-cd}
+\usetikzlibrary{arrows.meta}
+\tikzcdset{
+every arrow/.append style={thick},
+arrow style = tikz,            % TikZ 標準の矢印を使う
+%diagrams = {>={Stealth[round]}} % 矢尻を Stealth（丸み付き）に
+diagrams = {>={Latex[round]}}
+}
 \setlength{\dgARROWLENGTH}{1.4em}
+\usepackage[left=0cm]{geometry}
+\pagestyle{empty}
 
 \begin{document}
 \(
-  \begin{diagram}
-	\node{n=}\node[2]{3}\node[2]{5}\node[2]{7} \\
-	\node[2]{a_2}\node[2]{a_1} 
-	\\
-	\node{k=10}
-	\node[2]{\shortstack[t]{x \\ x \\ x}}\arrow[2]{e,t}{}\arrow{nw,t}{}
-	\node[2]{\shortstack[t]{x \\ \text{　} \text{　}}}\arrow[2]{e,t}{}\arrow{nw,t}{}
-	\node[2]{\bullet}
-	\node{=\{\beta_1\}}
-	\\
-	\node[2]{A_2}\node[2]{A_1}\node[2]{i}\arrow{nw,t}{} 
-	\\
-	\node{k=11}
-	\node[2]{\bullet}\arrow[2]{e,t}{}\arrow{nw,t}{}
-	\node[2]{\circ}\arrow[2]{e,t}{=}\arrow{nw,t}{}
-	\node[2]{\circ}
-	\node{=\{\alpha'_3\}}
-  \end{diagram}
+\begin{tikzcd}[
+nodes={font=\Huge,inner sep=2pt},
+row sep=0.3cm,
+column sep=0.3cm
+%column sep=0.01em
+]
+n= && & 3 & & 5 & & 7 & &  & & \\
+&& a_2 && a_1 \\ 
+k=10 &&& \bullet\arrow[lu] &\rightarrow& \circ\arrow[lu] &\rightarrow& \bullet &=& \{\beta_1\}  \\ 
+&& A_2 && A_1 && i\arrow[lu] \\
+k=11 &&& \bullet\arrow[lu] &\rightarrow& \circ\arrow[lu] &=& \circ &=& \{\alpha'_3\} \\ \\
+\\
+\end{tikzcd}
 \)
 \end{document}
-
-

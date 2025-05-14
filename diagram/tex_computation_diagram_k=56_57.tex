@@ -8,21 +8,14 @@
 
 \begin{document}
 \(
-\begin{tikzcd}[nodes={font=\Huge},row sep=0.2cm,column sep=0.1cm]
-n= & & 3 & & 5 & & 7 & & 9 & & 11 & & 13 \\
-k=56 \ \{ & & \bullet & = & \bullet & \hookleftarrow & \bullet & = & \bullet \\
-& {} & {} & {} & {} & B & {}  & {}  & {} & a \\
-k=57 & {} & \bullet & = & \bullet & \hookleftarrow & \bullet \\
- & {}  & {}  & {}  & {} & AB & {} & b 
+\begin{tikzcd}[nodes={font=\Huge,inner sep=0pt},row sep=0.2cm,column sep=0.1cm]
+n=&&  && 3 && 5 && 7 && 9 && 11 && 13 && 15 \\
+k=56 && && \bullet &=& \bullet &=& \bullet &=& \bullet &=& \bullet &=& \bullet \\
+&& && && \bullet &\rightarrow& \circ &\rightarrow& \bullet \\ \\
+k=57 && && && \bullet &\rightarrow& \circ &\rightarrow& \bullet \\ \\ \\ \\
+&& a&& && &=& && &=&  && &=&  && &=&  && &=&  && &=&  && &=&  
 \end{tikzcd}
 \) \\
-\(
-\begin{array}{lcccccccccccccccccccc}
-n= & 3 & & 5 & & 7 & & 9 & & 11 & & 13 & & 15 \\
-k=56 \ \{ & \substack{\bullet\\ {}} & \substack{=\\ {}} & \substack{\bullet\\ \bullet} & \substack{=\\ \rightarrow} & \substack{\bullet\\ \circ} & \substack{=\\ \rightarrow} & \substack{\bullet\\ \bullet} & \substack{=\\ {}} & \substack{\bullet\\ {}} & \substack{=\\ {}} & \substack{\bullet\\ {}} \\
-k=57 & & & \bullet & \rightarrow & \circ & \rightarrow & \bullet
-\end{array}
-\)
 \end{document}
 
 
