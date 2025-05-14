@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage[a4paper,margin=2cm,landscape]{geometry} % 横向き設定
+\usepackage{pb-diagram}
+\usepackage{amsmath}
+\usepackage{tikz-cd}
+\tikzcdset{every arrow/.append style={very thick}}
+\setlength{\dgARROWLENGTH}{1.4em}
+\pagestyle{empty}
+%\usepackage[left=1cm]{geometry}
+
+\begin{document}
+\(
+\begin{tikzcd}[
+nodes={font=\Large,inner sep=0pt},
+row sep=0.2cm,
+column sep=0.1cm
+%column sep=0.01em
+]
+n=& && 3 & & 5 & & 7 & & 9 & & 11 & & 13 & & 15 & & 17 & & 19 & & 21 & & 23 && 25 && 27 && 29 && 31\\
+&& && && && && && && && ABB_2 && bb_2 \\
+k=71& && && && && && && && && \bullet & \hookleftarrow & \bullet &=& \bullet && \\
+&& && && && && && && && && BB_2 && && ab_2 \\
+&& && && && && && && && B^4 && e' && && && B^2 && && ab \\
+k=72& && && && && && && && && \bullet & \hookleftarrow & \bullet &=& \bullet && && \bullet &=& \bullet &\hookleftarrow& \bullet && \\
+&& && && && && && && && && E' && && b^3 && && && AB && b \\
+&& && ABB_2^2 && bb_2^2 && && && && && e_2 && e_1 && && && && && \\
+k=73& && && \bullet & \hookleftarrow & \bullet &=& \bullet && && && && \bullet & \hookleftarrow & \bullet &=& \bullet && \\
+&& && && BB_2^2 && && ab_2^2 && && && && E_1 && && B^3 \\
+&& && && && && && && B^2B_2 && && abb_2 \\
+k=74& && && && && && && && \bullet &=& \bullet & \hookleftarrow & \bullet && && \\
+&& && && && && && && && && ABB_2 && bb_2 \\
+&& && && && && AB_2^2 && b_2^2 && BE' && && b^4 && \\
+k=75& && && && && && && && \bullet &=& \bullet & \hookleftarrow & \bullet && && \\
+& && && && && && \bullet & \hookleftarrow & \bullet &=& \bullet && \\
+&& && && && && && B_2^2 && && ph && B^4 && e' \\
+\end{tikzcd}
+\)
+\end{document}
+
+

@@ -1,0 +1,40 @@
+\documentclass{article}
+%\usepackage[a4paper,margin=2cm,landscape]{geometry} % 横向き設定
+\usepackage{pb-diagram}
+\usepackage{amsmath}
+\usepackage{tikz-cd}
+\usetikzlibrary{arrows.meta}
+\tikzcdset{
+every arrow/.append style={thick},
+arrow style = tikz,            % TikZ 標準の矢印を使う
+%diagrams = {>={Stealth[round]}} % 矢尻を Stealth（丸み付き）に
+diagrams = {>={Latex[round]}}
+}
+\setlength{\dgARROWLENGTH}{1.4em}
+\usepackage[left=0cm]{geometry}
+\pagestyle{empty}
+
+\begin{document}
+\(
+\begin{tikzcd}[
+nodes={font=\Huge,inner sep=1pt},
+row sep=0.1cm,
+column sep=0.3cm
+%column sep=0.01em
+]
+n= && & 3 & & 5 & & 7 & & 9 & & \\
+k=15 &&& && \\ \\
+&& ab \\ \\
+k=16 &&& \bullet\arrow[luu]&& \\ \\
+&& AB && b\arrow[luu] \\ \\
+k=17 &&& \bullet\arrow[luu] && \\ \\
+&& && B\arrow[luu] \\ \\
+k=18 &&& \\ \\
+k=19 &&& && \\ \\
+\\ \\ \\ \\
+&&& j &&=&&=&&=&&=&&=&&=&&=&&=&&=&&k&&k&&k&&k&&k&& \\
+\end{tikzcd}
+\)
+\end{document}
+
+
