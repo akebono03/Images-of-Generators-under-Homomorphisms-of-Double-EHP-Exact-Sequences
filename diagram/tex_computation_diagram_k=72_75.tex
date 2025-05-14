@@ -1,0 +1,42 @@
+\documentclass{article}
+\usepackage[a4paper,margin=2cm,landscape]{geometry} % 横向き設定
+\usepackage{pb-diagram}
+\usepackage{amsmath}
+\usepackage{tikz-cd}
+\usetikzlibrary{arrows.meta}
+\tikzcdset{
+every arrow/.append style={thick},
+arrow style = tikz,            % TikZ 標準の矢印を使う
+%diagrams = {>={Stealth[round]}} % 矢尻を Stealth（丸み付き）に
+diagrams = {>={Latex[round]}}
+}
+\setlength{\dgARROWLENGTH}{1.4em}
+%\usepackage[left=0cm]{geometry}
+\pagestyle{empty}
+
+\begin{document}
+\(
+\begin{tikzcd}[
+nodes={font=\Large,inner sep=0pt},
+row sep=0.2cm,
+column sep=0.1cm
+%column sep=0.01em
+]
+n= && & 3 & & 5 & & 7 & & 9 & & 11 & & 13 & & 15 & & 17 && 19 && 21 && 23 && 25 && 27 && 29 && 31 & stable \\
+&& && abb_2^2 && && && && ab^2b_2 && ph  \\
+k=72 &&& && && && && && \bullet\arrow[lu] && \bullet\arrow[lu] &=& \bullet &=& \bullet &=& \bullet  \\
+&&& && \bullet\arrow[luu] &=& \bullet &=& \bullet &=& \bullet &=& \bullet  &=& \bullet  &=& \bullet  &=& \bullet &=& \bullet  &=& \bullet &=& \bullet &=& \bullet &=& \bullet &=& \bullet & =\{\beta_1^2\beta_2^2\} \\
+&& && && && && && AB^2B_2 && b^2b_2\arrow[luu] && && && && b_2\arrow[luu] \\
+&& && && && && && b^5 \\
+k=73 &&& && && && && && \bullet\arrow[luu] &=& \bullet  &=& \bullet  &=& \bullet &=& \bullet  &=& \bullet  &=& \bullet &=& \bullet &=& \bullet &=& \bullet  \\
+& && && && && && && \bullet\arrow[luu] &&  \\ \\
+&& && && && && && B_5 && be'\arrow[luu] && && && && && && && && && B\arrow[luuu] \\
+k=74 &&& && && && && && \bullet\arrow[lu]  &=& \bullet  &=& \bullet &=& \bullet  &=& \bullet  &=& \bullet &=& \bullet &=& \bullet &=& \bullet &=& \bullet  & =\{\beta_5\} \\
+&& b^2b_2^2 && l \\
+k=75 &&& \bullet\arrow[lu] &\rightarrow& \circ\arrow[lu] &=& \circ &=& \circ &=& \circ &=& \circ &=& \circ &=& \circ &=& \circ &=& \circ &=& \circ &=& \circ &=& \circ &=& \circ &=& \circ& = \{\mu\} \\
+\\
+\end{tikzcd}
+\)
+\end{document}
+
+

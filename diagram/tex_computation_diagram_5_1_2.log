@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.5.2)  8 MAY 2025 17:08
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.5.2)  14 MAY 2025 10:38
  restricted system commands enabled.
 **tex_computation_diagram_5_1_2.tex
 (./tex_computation_diagram_5_1_2.tex
@@ -594,7 +594,7 @@ e
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 
-Overfull \hbox (52.33778pt too wide) in paragraph at lines 18--46
+Overfull \hbox (86.5829pt too wide) in paragraph at lines 18--46
 []$[]$ 
  []
 
@@ -611,21 +611,21 @@ L3 programming layer <2025-04-14>
 )
 
 Here is how much of LuaTeX's memory you used:
- 15256 strings out of 471925
+ 15259 strings out of 471925
  100000,794899 words of node,token memory allocated
  530 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 59 glue_spec,
  8 attribute_list, 2 write nodes
    avail lists: 2:6542,3:2801,4:10,5:70,6:2,7:6052,8:14,9:2722
- 41459 multiletter control sequences out of 65536+600000
- 32 fonts using 1849263 bytes
- 116i,16n,114p,500b,1032s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 41462 multiletter control sequences out of 65536+600000
+ 40 fonts using 2346335 bytes
+ 116i,16n,114p,500b,1040s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf><c:/t
 exlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/202
-5/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2025/texmf-dist/fonts/typ
+5/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2025/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2025/texmf-dist/fonts/typ
 e1/public/amsfonts/cm/cmsy10.pfb>
-Output written on tex_computation_diagram_5_1_2.pdf (1 page, 41952 bytes).
+Output written on tex_computation_diagram_5_1_2.pdf (1 page, 41280 bytes).
 
 PDF statistics: 34 PDF objects out of 1000 (max. 8388607)
  23 compressed objects within 1 object stream
