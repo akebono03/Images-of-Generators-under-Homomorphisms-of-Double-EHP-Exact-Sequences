@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.5.2)  14 MAY 2025 17:26
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.5.2)  14 MAY 2025 20:55
  restricted system commands enabled.
 **tex_computation_diagram_k=57_61.tex
 (./tex_computation_diagram_k=57_61.tex
@@ -606,11 +606,11 @@ L3 programming layer <2025-04-14>
 
 Here is how much of LuaTeX's memory you used:
  15406 strings out of 471925
- 125007,794899 words of node,token memory allocated
+ 125009,794899 words of node,token memory allocated
  530 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 59 glue_spec,
  8 attribute_list, 2 write nodes
-   avail lists: 2:8087,3:3415,4:10,5:90,6:2,7:7694,8:5,9:4038
+   avail lists: 2:8067,3:3407,4:10,5:90,6:2,7:7670,8:5,9:4026
  41609 multiletter control sequences out of 65536+600000
  32 fonts using 1849263 bytes
  116i,16n,114p,524b,993s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -618,7 +618,7 @@ Here is how much of LuaTeX's memory you used:
 e/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2025/texmf-dist/font
 s/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on tex_computation_diagram_k=57_61.pdf (1 page, 39519 bytes).
+Output written on tex_computation_diagram_k=57_61.pdf (1 page, 39521 bytes).
 
 PDF statistics: 27 PDF objects out of 1000 (max. 8388607)
  19 compressed objects within 1 object stream
