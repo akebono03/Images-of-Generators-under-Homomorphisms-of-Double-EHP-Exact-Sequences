@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.5.2)  10 MAY 2025 16:30
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.5.2)  14 MAY 2025 16:52
  restricted system commands enabled.
 **tex_computation_diagram_k=3_34.tex
 (./tex_computation_diagram_k=3_34.tex
@@ -606,24 +606,23 @@ L3 programming layer <2025-04-14>
 )
 
 Here is how much of LuaTeX's memory you used:
- 15587 strings out of 471925
+ 15586 strings out of 471925
  125003,794899 words of node,token memory allocated
  530 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 59 glue_spec,
  8 attribute_list, 2 write nodes
    avail lists: 2:7888,3:3385,4:10,5:58,6:2,7:7036,8:6,9:3692
- 41790 multiletter control sequences out of 65536+600000
+ 41789 multiletter control sequences out of 65536+600000
  40 fonts using 2346335 bytes
- 116i,16n,114p,501b,1030s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 116i,16n,114p,501b,1038s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texliv
 e/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2025/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2025/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmsy8.pfb>
-Output written on tex_computation_diagram_k=3_34.pdf (1 page, 44168 bytes).
+f-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2025/texmf-dist/font
+s/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on tex_computation_diagram_k=3_34.pdf (1 page, 37014 bytes).
 
-PDF statistics: 31 PDF objects out of 1000 (max. 8388607)
- 22 compressed objects within 1 object stream
+PDF statistics: 27 PDF objects out of 1000 (max. 8388607)
+ 19 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

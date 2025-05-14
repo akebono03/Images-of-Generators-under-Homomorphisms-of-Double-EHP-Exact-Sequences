@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.5.2)  8 MAY 2025 21:16
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.5.2)  14 MAY 2025 17:18
  restricted system commands enabled.
 **tex_computation_diagram_5_3_3.tex
 (./tex_computation_diagram_5_3_3.tex
@@ -594,11 +594,6 @@ e
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 
-Overfull \hbox (95.59811pt too wide) in paragraph at lines 18--43
-[]$[]$ 
- []
-
-
 
 [1
 
@@ -611,25 +606,24 @@ L3 programming layer <2025-04-14>
 )
 
 Here is how much of LuaTeX's memory you used:
- 15886 strings out of 471925
+ 15880 strings out of 471925
  156265,794899 words of node,token memory allocated
  530 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 59 glue_spec,
  8 attribute_list, 2 write nodes
    avail lists: 2:9766,3:4213,4:10,5:44,6:2,7:8596,8:7,9:4302
- 42089 multiletter control sequences out of 65536+600000
- 40 fonts using 2346335 bytes
- 116i,16n,114p,500b,1032s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 42083 multiletter control sequences out of 65536+600000
+ 32 fonts using 1849263 bytes
+ 116i,16n,114p,500b,1040s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf><c:/t
 exlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/202
-5/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2025/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2025/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmsy8.pfb>
-Output written on tex_computation_diagram_5_3_3.pdf (1 page, 49296 bytes).
+5/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2025/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmsy10.pfb>
+Output written on tex_computation_diagram_5_3_3.pdf (1 page, 42987 bytes).
 
-PDF statistics: 38 PDF objects out of 1000 (max. 8388607)
- 26 compressed objects within 1 object stream
+PDF statistics: 34 PDF objects out of 1000 (max. 8388607)
+ 23 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 
